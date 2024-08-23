@@ -1,11 +1,11 @@
-title: Read MLSys Papers
+title: Open Genome
 description: A starter template for a Jeykll site using the Just the Docs theme!
 theme: just-the-docs
 
-url: https://mlsys-paper.github.io
+url: https://open-genome.github.io
 
 aux_links:
-  Github: https://github.com/mlsys-paper/mlsys-paper.github.io
+  Github: https://github.com/open-genome/open-genome.github.io
 
 compress_html:
   blanklines: false
