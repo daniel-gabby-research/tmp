@@ -3,7 +3,7 @@ layout: default
 parent: Positional Embedding
 grand_parent: ArXiv
 title: "Contextual Position Encoding: Learning to Count What’s Important"
-nav_order: 1
+nav_order: 2
 discuss: true
 math: katex
 ---
