@@ -65,37 +65,47 @@ $$
 
 $$\langle f_\theta(q, m), f_\theta(k, n) \rangle = \langle q, k \rangle \cos((m-n)\theta) + \langle q_\perp, k \rangle \sin((m-n)\theta)$$
 
-这里，q⊥ = [-q₁, q₀, -q₃, q₂, ...]，是q的一个特殊置换。
+这里，$q⊥ = [-q_1, q_0, -q_3, q_2, ...]$，是$q$的一个特殊置换。
 
 ### 2.3 数学推导
 
 让我们详细推导这个公式：
 
-1) 首先，展开 $f_\theta(q, m)$ 和 $f_\theta(k, n)$：
+1) 首先，展开 f_θ(q, m) 和 f_θ(k, n)：
 
-$f_\theta(q, m) = q e^{im\theta} = (q_1 + iq_2)(\cos(m\theta) + i \sin(m\theta))$
-
-$f_\theta(k, n) = k e^{in\theta} = (k_1 - ik_2)(\cos(n\theta) - i \sin(n\theta))$
+$$
+\begin{align*}
+f_θ(q, m) &= q e^{imθ} = (q_1 + iq_2)(\cos(mθ) + i \sin(mθ)) \\
+f_θ(k, n) &= k e^{inθ} = (k_1 - ik_2)(\cos(nθ) - i \sin(nθ))
+\end{align*}
+$$
 
 2) 计算它们的内积：
 
-$\langle f_\theta(q, m), f_\theta(k, n) \rangle = (q_1 + iq_2)(\cos(m\theta) + i \sin(m\theta))(k_1 - ik_2)(\cos(n\theta) - i \sin(n\theta))$
+$$
+\begin{align*}
+⟨f_θ(q, m), f_θ(k, n)⟩ &= (q_1 + iq_2)(\cos(mθ) + i \sin(mθ))(k_1 - ik_2)(\cos(nθ) - i \sin(nθ))
+&= [(q_1k_1 + q_2k_2) + i(q_2k_1 - q_1k_2)](\cos((m-n)θ) + i \sin((m-n)θ)) \\
+&= (q_1k_1 + q_2k_2)\cos((m-n)θ) - (q_2k_1 - q_1k_2)\sin((m-n)θ) + i[...]
+\end{align*}
+$$
 
-3) 展开并整理：
+3) 取实部：
 
-$= [(q_1k_1 + q_2k_2) + i(q_2k_1 - q_1k_2)](\cos((m-n)\theta) + i \sin((m-n)\theta))$
+$$
+\begin{align*}
+\text{Re}[⟨f_θ(q, m), f_θ(k, n)⟩] &= (q_1k_1 + q_2k_2)\cos((m-n)θ) + (q_1k_2 - q_2k_1)\sin((m-n)θ)
+\end{align*}
+$$
 
-$= (q_1k_1 + q_2k_2)\cos((m-n)\theta) - (q_2k_1 - q_1k_2)\sin((m-n)\theta) + i[...]$
+4) 注意到 $q_⊥ = [-q_2, q_1]$，因此：
 
-4) 取实部：
-
-$\text{Re}[\langle f_\theta(q, m), f_\theta(k, n) \rangle] = (q_1k_1 + q_2k_2)\cos((m-n)\theta) + (q_1k_2 - q_2k_1)\sin((m-n)\theta)$
-
-5) 注意到 $q_\perp = [-q_2, q_1]$，因此：
-
-$\langle q, k \rangle = q_1k_1 + q_2k_2$
-
-$\langle q_\perp, k \rangle = q_1k_2 - q_2k_1$
+$$
+\begin{align*}
+⟨q, k⟩ &= q_1k_1 + q_2k_2 \\
+⟨q_⊥, k⟩ &= q_1k_2 - q_2k_1
+\end{align*}
+$$
 
 这就得到了我们的最终公式。
 
@@ -122,7 +132,7 @@ $$\theta^*_j = \frac{\alpha}{10000^{\rho}} + (1 - \alpha)\theta_j$$
 
 ### 4.1 新的attention score公式
 
-使用新的 θ*，attention score可以表示为：
+使用新的 $θ^*$，attention score可以表示为：
 
 $$a^*(m-n) = \text{Re}\left[\sum_{j=0}^{d/2-1} (q_{2j} + iq_{2j+1})(k_{2j} - ik_{2j+1})e^{i(m-n)\theta^*_j}\right]$$
 
@@ -170,12 +180,12 @@ $$a^*(m-n) = \cos((m-n)\phi) \cdot a'(m-n) - \sin((m-n)\phi) \cdot b'(m-n)$$
 
 ### 5.1 Hilbert变换对
 
-a'(m-n) 和 b'(m-n) 构成了一个Hilbert变换对。这意味着它们捕捉了信号的不同方面，提供了更丰富的表示。
+$a'(m-n)$ 和 $b'(m-n)$ 构成了一个Hilbert变换对。这意味着它们捕捉了信号的不同方面，提供了更丰富的表示。
 
 ### 5.2 局部性与全局性的平衡
 
-- φ 项引入了一个全局的周期调制，其频率由 ρ 控制。
-- (1-α)θ_j 项保留了原始RoPE的局部敏感性，但其影响被 α 调节。
+- $φ$ 项引入了一个全局的周期调制，其频率由 $ρ$ 控制。
+- $(1-α)θ_j$ 项保留了原始RoPE的局部敏感性，但其影响被 $α$ 调节。
 
 ### 5.3 θ 对attention分布的影响
 
@@ -190,9 +200,9 @@ $$\cos((m-n)\theta) \approx 1 - \frac{1}{2}((m-n)\theta)^2 + O((m-n)^4\theta^4)$
 
 ## 6. RoPE变体的潜在应用和优势
 
-1. **可调节的感受野**：通过调整 α 和 ρ，模型可以在局部精确性和全局上下文之间取得平衡。
+1. **可调节的感受野**：通过调整 $\alpha$ 和 $\rho$，模型可以在局部精确性和全局上下文之间取得平衡。
 2. **增强的表达能力**：复值表示允许模型捕捉更复杂的attention模式。
-3. **多尺度表示**：不同的 θ_j 允许模型同时捕捉不同尺度的依赖关系。
+3. **多尺度表示**：不同的 $\theta_j$ 允许模型同时捕捉不同尺度的依赖关系。
 4. **任务适应性**：可学习参数使模型能够根据具体任务需求调整位置编码特性。
 
 ## 7. 结论与未来方向
@@ -200,6 +210,7 @@ $$\cos((m-n)\theta) \approx 1 - \frac{1}{2}((m-n)\theta)^2 + O((m-n)^4\theta^4)$
 RoPE及其变体为位置编码提供了一个强大而灵活的框架。通过引入可调节的参数，RoPE变体有潜力在保持原始RoPE优势的同时，提供更精细的位置编码控制。
 
 未来的研究方向可能包括：
-1. 探索自动调整 α 和 ρ 的方法。
+1. 探索自动调整 $\alpha$ 和 $\rho$ 的方法。
 2. 研究RoPE在不同类型任务中的最佳配置。
-3. 深入研究Hilbert变换对在注意力机制中的作用及其理论意义。
+3. 将RoPE的思想扩展到其他模态，如图像或时间序列数据。
+4. 深入研究Hilbert变换对在注意力机制中的作用及其理论意义。
