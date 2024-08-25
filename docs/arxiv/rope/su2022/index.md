@@ -74,6 +74,7 @@ $$\langle f_\theta(q, m), f_\theta(k, n) \rangle = \langle q, k \rangle \cos((m-
 1) 首先，展开 $f_\theta(q, m)$ 和 $f_\theta(k, n)$：
 
 $f_\theta(q, m) = q e^{im\theta} = (q_1 + iq_2)(\cos(m\theta) + i \sin(m\theta))$
+
 $f_\theta(k, n) = k e^{in\theta} = (k_1 - ik_2)(\cos(n\theta) - i \sin(n\theta))$
 
 2) 计算它们的内积：
@@ -83,6 +84,7 @@ $\langle f_\theta(q, m), f_\theta(k, n) \rangle = (q_1 + iq_2)(\cos(m\theta) + i
 3) 展开并整理：
 
 $= [(q_1k_1 + q_2k_2) + i(q_2k_1 - q_1k_2)](\cos((m-n)\theta) + i \sin((m-n)\theta))$
+
 $= (q_1k_1 + q_2k_2)\cos((m-n)\theta) - (q_2k_1 - q_1k_2)\sin((m-n)\theta) + i[...]$
 
 4) 取实部：
@@ -92,6 +94,7 @@ $\text{Re}[\langle f_\theta(q, m), f_\theta(k, n) \rangle] = (q_1k_1 + q_2k_2)\c
 5) 注意到 $q_\perp = [-q_2, q_1]$，因此：
 
 $\langle q, k \rangle = q_1k_1 + q_2k_2$
+
 $\langle q_\perp, k \rangle = q_1k_2 - q_2k_1$
 
 这就得到了我们的最终公式。
