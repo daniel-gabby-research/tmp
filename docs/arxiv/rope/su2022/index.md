@@ -71,28 +71,28 @@ $$\langle f_\theta(q, m), f_\theta(k, n) \rangle = \langle q, k \rangle \cos((m-
 
 让我们详细推导这个公式：
 
-1) 首先，展开 f_θ(q, m) 和 f_θ(k, n)：
-   
-   f_θ(q, m) = q e^{imθ} = (q_1 + iq_2)(\cos(mθ) + i sin(mθ))
-   f_θ(k, n) = k e^{inθ} = (k_1 - ik_2)(\cos(nθ) - i sin(nθ))
+1) 首先，展开 $f_\theta(q, m)$ 和 $f_\theta(k, n)$：
+
+    $f_\theta(q, m) = q e^{im\theta} = (q_1 + iq_2)(\cos(m\theta) + i \sin(m\theta))$
+    $f_\theta(k, n) = k e^{in\theta} = (k_1 - ik_2)(\cos(n\theta) - i \sin(n\theta))$
 
 2) 计算它们的内积：
 
-   ⟨f_θ(q, m), f_θ(k, n)⟩ = (q_1 + iq_2)(cos(mθ) + i sin(mθ))(k_1 - ik_2)(cos(nθ) - i sin(nθ))
+    $\langle f_\theta(q, m), f_\theta(k, n) \rangle = (q_1 + iq_2)(\cos(m\theta) + i \sin(m\theta))(k_1 - ik_2)(\cos(n\theta) - i \sin(n\theta))$
 
 3) 展开并整理：
 
-   = [(q_1k_1 + q_2k_2) + i(q_2k_1 - q_1k_2)](cos((m-n)θ) + i sin((m-n)θ))
-   = (q_1k_1 + q_2k_2)cos((m-n)θ) - (q_2k_1 - q_1k_2)sin((m-n)θ) + i[...]
+    $= [(q_1k_1 + q_2k_2) + i(q_2k_1 - q_1k_2)](\cos((m-n)\theta) + i \sin((m-n)\theta))$
+    $= (q_1k_1 + q_2k_2)\cos((m-n)\theta) - (q_2k_1 - q_1k_2)\sin((m-n)\theta) + i[...]$
 
 4) 取实部：
 
-   Re[⟨f_θ(q, m), f_θ(k, n)⟩] = (q_1k_1 + q_2k_2)cos((m-n)θ) + (q_1k_2 - q_2k_1)sin((m-n)θ)
+    $\text{Re}[\langle f_\theta(q, m), f_\theta(k, n) \rangle] = (q_1k_1 + q_2k_2)\cos((m-n)\theta) + (q_1k_2 - q_2k_1)\sin((m-n)\theta)$
 
-5) 注意到 q_⊥ = [-q_2, q_1]，因此：
+5) 注意到 $q_\perp = [-q_2, q_1]$，因此：
 
-   ⟨q, k⟩ = q_1k_1 + q_2k_2
-   ⟨q_⊥, k⟩ = q_1k_2 - q_2k_1
+    $\langle q, k \rangle = q_1k_1 + q_2k_2$
+    $\langle q_\perp, k \rangle = q_1k_2 - q_2k_1$
 
 这就得到了我们的最终公式。
 
