@@ -10,6 +10,8 @@ math: katex
 
 # LieRE: Generalizing Rotary Position Encodings
 
+Paper link: [https://arxiv.org/abs/2406.10322v1](https://arxiv.org/abs/2406.10322v1)
+
 在自然语言处理和计算机视觉领域，transformer 模型的注意力机制已成为主流。然而，传统的绝对位置编码和相对位置编码（如 RoPE）在高维数据上的表现并不理想。本文将探讨一种新的位置编码方法——Lie 群相对位置编码（LieRE），它能够在不改变模型架构的情况下处理多种数据模态和维度。通过利用 Lie 群和 Lie 代数的数学特性，LieRE 提供了一种通用且高效的编码方案。
 
 ## 1. 引言
