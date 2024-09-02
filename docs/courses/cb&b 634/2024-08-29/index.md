@@ -2,7 +2,7 @@
 layout: default
 parent: CB&B 634 Computational Methods in Informatics
 grand_parent: Courses at Yale
-title: "2024-08-29"
+title: "2024-08-29 Introduction to Informatics"
 nav_order: 20
 discuss: true
 math: katex

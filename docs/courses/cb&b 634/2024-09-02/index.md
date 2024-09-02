@@ -54,17 +54,17 @@ Effective data management ensures your research is reproducible and your data is
 - **Document All Data Processing Steps**: Use scripts or notebooks to automate and document data processing steps. This documentation ensures your process is transparent and reproducible.
 
   > **Example**: Document data cleaning steps in a Python script.
-  ```python
-  \# data_cleaning.py
+  ```py
+  # data_cleaning.py
   import pandas as pd
   
-  \# Load raw data
+  # Load raw data
   df = pd.read_csv('raw_data.csv')
   
-  \# Clean data by removing missing values
+  # Clean data by removing missing values
   df_clean = df.dropna().reset_index(drop=True)
   
-  \# Save cleaned data
+  # Save cleaned data
   df_clean.to_csv('clean_data.csv', index=False)
   ```
 
@@ -81,7 +81,7 @@ Good coding practices improve code readability, maintainability, and reproducibi
 - **Write Modular Code**: Break your scripts into small, reusable functions that each perform a single task. This modular approach makes your code easier to understand, test, and debug.
 
   > **Example**: Refactor code into functions.
-  ```python
+  ```py
   def load_data(file_path):
       """Load data from a CSV file."""
       return pd.read_csv(file_path)
@@ -103,7 +103,7 @@ Good coding practices improve code readability, maintainability, and reproducibi
 - **Include Documentation**: Write comments to explain what each part of your code does, and include a brief description at the start of each script or function.
 
   > **Example**: Adding comments to code.
-  ```python
+  ```py
   # Load raw survey data
   df = pd.read_csv('raw_data.csv')
   
@@ -125,7 +125,7 @@ Effective collaboration involves clear communication, shared goals, and structur
 - **Create a README File**: Every project should have a `README.md` file that explains the project's purpose, setup instructions, and contribution guidelines. This file is often the first resource new collaborators consult.
 
   > **Example**: Basic structure of a `README.md` file.
-  ```markdown
+  ```md
   # Project: Survey Data Analysis
   
   This project analyzes survey data to identify trends in public opinion.
@@ -227,7 +227,7 @@ Efficiently managing the writing process is essential for successful scientific 
 - **Use Collaborative Writing Tools**: Google Docs is excellent for real-time collaboration, allowing multiple authors to edit and comment simultaneously. For more control, consider using Markdown or LaTeX with Git to version control manuscripts.
 
   > **Example Markdown Template for a Manuscript**:
-  ```markdown
+  ```md
   # Title of the Paper
   
   ## Abstract
