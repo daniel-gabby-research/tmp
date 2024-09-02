@@ -54,17 +54,18 @@ Effective data management ensures your research is reproducible and your data is
 - **Document All Data Processing Steps**: Use scripts or notebooks to automate and document data processing steps. This documentation ensures your process is transparent and reproducible.
 
   > **Example**: Document data cleaning steps in a Python script.
-  ```py
-  # data_cleaning.py
+
+  ```python
+  \# data_cleaning.py
   import pandas as pd
   
-  # Load raw data
+  \# Load raw data
   df = pd.read_csv('raw_data.csv')
   
-  # Clean data by removing missing values
+  \# Clean data by removing missing values
   df_clean = df.dropna().reset_index(drop=True)
   
-  # Save cleaned data
+  \# Save cleaned data
   df_clean.to_csv('clean_data.csv', index=False)
   ```
 
@@ -81,6 +82,7 @@ Good coding practices improve code readability, maintainability, and reproducibi
 - **Write Modular Code**: Break your scripts into small, reusable functions that each perform a single task. This modular approach makes your code easier to understand, test, and debug.
 
   > **Example**: Refactor code into functions.
+
   ```py
   def load_data(file_path):
       """Load data from a CSV file."""
@@ -90,7 +92,7 @@ Good coding practices improve code readability, maintainability, and reproducibi
       """Clean data by dropping missing values."""
       return df.dropna().reset_index(drop=True)
 
-  # Main execution
+  \# Main execution
   df = load_data('raw_data.csv')
   df_clean = clean_data(df)
   df_clean.to_csv('clean_data.csv', index=False)
@@ -103,11 +105,12 @@ Good coding practices improve code readability, maintainability, and reproducibi
 - **Include Documentation**: Write comments to explain what each part of your code does, and include a brief description at the start of each script or function.
 
   > **Example**: Adding comments to code.
+
   ```py
-  # Load raw survey data
+  \# Load raw survey data
   df = pd.read_csv('raw_data.csv')
   
-  # Remove missing values and reset index
+  \# Remove missing values and reset index
   df_clean = df.dropna().reset_index(drop=True)
   ```
 
@@ -125,17 +128,18 @@ Effective collaboration involves clear communication, shared goals, and structur
 - **Create a README File**: Every project should have a `README.md` file that explains the project's purpose, setup instructions, and contribution guidelines. This file is often the first resource new collaborators consult.
 
   > **Example**: Basic structure of a `README.md` file.
+
   ```md
-  # Project: Survey Data Analysis
+  \# Project: Survey Data Analysis
   
   This project analyzes survey data to identify trends in public opinion.
   
-  ## Setup Instructions
+  \#\# Setup Instructions
   Install required Python packages:
 
   > pip install -r requirements.txt
   
-  ## Contributing
+  \#\# Contributing
   Please see the `CONTRIBUTING.md` file for guidelines.
   ```
 
@@ -152,7 +156,7 @@ Effective collaboration involves clear communication, shared goals, and structur
 - **Maintain a Shared To-Do List**: Use a shared to-do list or issue tracker to manage tasks and track progress. This could be a simple text file (`todo.md`) or a list of issues on GitHub.
 
   > **Example**: GitHub Issues for task management.
-  ```markdown
+  ```md
   - [ ] Clean raw data
   - [ ] Perform initial data analysis
   - [ ] Write introduction for manuscript
@@ -228,15 +232,15 @@ Efficiently managing the writing process is essential for successful scientific 
 
   > **Example Markdown Template for a Manuscript**:
   ```md
-  # Title of the Paper
+  \# Title of the Paper
   
-  ## Abstract
+  \#\# Abstract
   Brief summary of the research.
   
-  ## Introduction
+  \#\# Introduction
   Background and motivation for the study.
   
-  ## Methods
+  \#\# Methods
   Detailed description of the methods used.
   ```
 
