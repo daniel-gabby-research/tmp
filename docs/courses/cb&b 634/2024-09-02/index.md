@@ -55,16 +55,16 @@ Effective data management ensures your research is reproducible and your data is
 
   > **Example**: Document data cleaning steps in a Python script.
   ```python
-  # data_cleaning.py
+  \# data_cleaning.py
   import pandas as pd
   
-  # Load raw data
+  \# Load raw data
   df = pd.read_csv('raw_data.csv')
   
-  # Clean data by removing missing values
+  \# Clean data by removing missing values
   df_clean = df.dropna().reset_index(drop=True)
   
-  # Save cleaned data
+  \# Save cleaned data
   df_clean.to_csv('clean_data.csv', index=False)
   ```
 
