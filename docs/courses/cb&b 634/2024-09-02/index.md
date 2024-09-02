@@ -231,8 +231,9 @@ Efficiently managing the writing process is essential for successful scientific 
 - **Use Collaborative Writing Tools**: Google Docs is excellent for real-time collaboration, allowing multiple authors to edit and comment simultaneously. For more control, consider using Markdown or LaTeX with Git to version control manuscripts.
 
   > **Example Markdown Template for a Manuscript**:
+
   ```md
-  \# Title of the Paper
+  # Title of the Paper
   
   \#\# Abstract
   Brief summary of the research.
