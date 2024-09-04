@@ -157,3 +157,13 @@ This means we should use $q = 1$.
 > $$
 
 ![alt text](image-1.png)
+
+### 2.3. Elastic Net
+
+Elastic Net is a regularization method that combines the L1 and L2 penalties of Lasso and Ridge regression. It is defined as:
+
+$$
+\min_{\beta} \sum_{i=1}^n (Y_i - \beta^T X_i)^2 + \lambda \left( \alpha \|\beta\|_1 + (1-\alpha) \|\beta\|_2^2 \right)
+$$
+
+
