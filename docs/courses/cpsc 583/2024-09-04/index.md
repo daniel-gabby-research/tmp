@@ -61,6 +61,56 @@ PageRank can be thought of as a way of computing the stationary distribution of 
 
    Mathematically, this is equivalent to finding the principal eigenvector of the Google matrix $ G = dA + \dfrac{1-d}{N}E $, where $ E $ is a matrix with all elements set to 1.
 
+## Python Implementation of PageRank
+
+Below is a Python implementation of the PageRank algorithm using the iterative approach:
+
+```python
+import numpy as np
+
+def pagerank(G, d=0.85, tol=1.0e-6, max_iter=100):
+    """
+    Computes PageRank for each node in the graph G.
+    
+    Parameters:
+    G (numpy.ndarray): Adjacency matrix representing the graph.
+    d (float): Damping factor, typically set to 0.85.
+    tol (float): Convergence tolerance.
+    max_iter (int): Maximum number of iterations.
+    
+    Returns:
+    numpy.ndarray: Array of PageRank values for each node.
+    """
+    N = G.shape[0]
+    R = np.ones(N) / N  # Initial uniform PageRank values
+    M = G / G.sum(axis=0)  # Normalized adjacency matrix (stochastic matrix)
+
+    for i in range(max_iter):
+        R_new = (1 - d) / N + d * M @ R
+        if np.linalg.norm(R_new - R, 1) < tol:
+            print(f"Converged after {i+1} iterations.")
+            break
+        R = R_new
+
+    return R
+
+# Example usage
+G = np.array([[0, 0, 1, 0],
+              [1, 0, 0, 1],
+              [0, 1, 0, 0],
+              [1, 1, 0, 0]])
+
+ranks = pagerank(G)
+print("PageRank values:", ranks)
+```
+
+In this code:
+
+- `G` is the adjacency matrix of the web graph.
+- `d` is the damping factor.
+- `R` is initialized with equal probability for each page.
+- The iterative process continues until the PageRank values converge within a tolerance level or the maximum number of iterations is reached.
+
 ![alt text](image-1.png)
 
 ## Results and Implications
