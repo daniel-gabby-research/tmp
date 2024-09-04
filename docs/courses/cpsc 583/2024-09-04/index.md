@@ -2,7 +2,7 @@
 layout: default
 parent: CPSC 583 Deep Learning on Graph-Structured Data
 grand_parent: Courses at Yale
-title: "PageRank"
+title: "The PageRank Citation Ranking"
 nav_order: 1
 discuss: true
 math: katex
