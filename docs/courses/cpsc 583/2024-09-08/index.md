@@ -55,12 +55,12 @@ Here's a comparison of some popular shallow embedding approaches:
 
 | Method | Decoder | Similarity Measure | Loss Function |
 |--------|---------|-------------------|---------------|
-| Laplacian Eigenmaps | $ \|\mathbf{z}_i - \mathbf{z}_j\|^2_2 $ | general | $ \mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) \cdot s_\mathcal{G}(v_i, v_j) $ |
-| Graph Factorization | $ \mathbf{z}_i^\top \mathbf{z}_j $ | $ \mathbf{A}_{ij} $ | $ \|\mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) - s_\mathcal{G}(v_i, v_j)\|^2_2 $ |
-| GraRep | $ \mathbf{z}_i^\top \mathbf{z}_j $ | $ \mathbf{A}_{ij}, \mathbf{A}^2_{ij}, ..., \mathbf{A}^k_{ij} $ | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
-| HOPE | $ \mathbf{z}_i^\top \mathbf{z}_j $ | general | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
-| DeepWalk | $\frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)}$ | $p_\mathcal{G}(v_j\|v_i)$ | $-s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j))$ |
-| node2vec | $\frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)}$ | $p_\mathcal{G}(v_j\|v_i)$ (biased) | $-s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j))$ |
+| Laplacian Eigenmaps | $$ \|\mathbf{z}_i - \mathbf{z}_j\|^2_2 $$ | general | $$ \mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) \cdot s_\mathcal{G}(v_i, v_j) $$ |
+| Graph Factorization | $$ \mathbf{z}_i^\top \mathbf{z}_j $$ | $$ \mathbf{A}_{ij} $$ | $$ \|\mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) - s_\mathcal{G}(v_i, v_j)\|^2_2 $$ |
+| GraRep | $$ \mathbf{z}_i^\top \mathbf{z}_j $$ | $$ \mathbf{A}_{ij}, \mathbf{A}^2_{ij}, ..., \mathbf{A}^k_{ij} $$ | $$ \|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2 $$ |
+| HOPE | $$ \mathbf{z}_i^\top \mathbf{z}_j $$ | general | $$ \|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2 $$ |
+| DeepWalk | $$ \frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)} $$ | $$ p_\mathcal{G}(v_j\|v_i) $$ | $$ -s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j)) $$ |
+| node2vec | $$ \frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)} $$ | $$ p_\mathcal{G}(v_j\|v_i) $$ (biased) | $$ -s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j)) $$ |
 
 ### 2.1 Laplacian Eigenmaps
 
@@ -168,8 +168,10 @@ where $s_i$ is the PPMI vector for node $v_i$.
 
 SDNE uses a deep autoencoder to preserve both first-order and second-order proximities:
 
-1. First-order proximity: $\mathcal{L}_{1st} = \sum_{(i,j) \in \mathcal{E}} \mathbf{A}_{ij} \Vert \mathbf{z}_i - \mathbf{z}_j \Vert^2_2$
-2. Second-order proximity: $\mathcal{L}_{2nd} = \sum_{i=1}^{\vert \mathcal{V} \vert} \Vert (\hat{s_i} - s_i) \odot b_i \Vert^2_2$
+1. First-order proximity: 
+$$\mathcal{L}_{1st} = \sum_{(i,j) \in \mathcal{E}} \mathbf{A}_{ij} \Vert \mathbf{z}_i - \mathbf{z}_j \Vert^2_2$$
+2. Second-order proximity: 
+$$\mathcal{L}_{2nd} = \sum_{i=1}^{\vert \mathcal{V} \vert} \Vert (\hat{s_i} - s_i) \odot b_i \Vert^2_2$$
 
 where $\hat{s_i} = \mathrm{DEC}(\mathrm{ENC}(s_i))$, $s_i$ is the adjacency vector of node $v_i$, and $b_i$ is a weight vector.
 
