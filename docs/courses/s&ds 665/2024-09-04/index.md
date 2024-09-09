@@ -31,6 +31,8 @@ $$
 
 ### 1.1 Algorithm for Lasso: Coordinate Descent
 
+![alt text](image-4.png)
+
 For each predictor $$ \beta_j $$, the algorithm minimizes the following expression using *soft-thresholding*:
 
 $$
