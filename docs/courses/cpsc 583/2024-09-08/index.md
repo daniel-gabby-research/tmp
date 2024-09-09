@@ -6,6 +6,7 @@ title: "Representation Learning on Graphs: Methods and Applications"
 nav_order: 2
 discuss: true
 math: katex
+render_with_liquid: false
 ---
 
 # Representation Learning on Graphs: Methods and Applications
