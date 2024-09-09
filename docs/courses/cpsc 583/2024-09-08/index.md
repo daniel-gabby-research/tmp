@@ -362,6 +362,7 @@ Graph coarsening involves creating a hierarchy of graphs $\mathcal{G}_0, \mathca
 Various pooling operations can be used to create fixed-size representations of subgraphs:
 
 1. DiffPool:
+
    $$\begin{aligned}
    \mathbf{S}^{(l)} &= \text{softmax}(\text{GNN}_l^{pool}(\mathbf{A}^{(l)}, \mathbf{X}^{(l)})) \\
    \mathbf{X}^{(l+1)} &= \mathbf{S}^{(l)\top} \text{GNN}_l^{embed}(\mathbf{A}^{(l)}, \mathbf{X}^{(l)}) \\
@@ -370,10 +371,12 @@ Various pooling operations can be used to create fixed-size representations of s
 
 2. SortPool:
    Sort node features and select the top-k nodes:
+
    $$Z = \text{sort}(\text{CONCAT}(z_v | v \in G))[:k, :]$$
 
 3. Set2Set:
    Use attention mechanism to create permutation-invariant graph representations:
+
    $$\begin{aligned}
    q_t &= \text{LSTM}(q_{t-1}) \\
    \alpha_{i,t} &= \text{softmax}(q_t^\top h_i) \\
