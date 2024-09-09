@@ -40,63 +40,59 @@ $$
 1. **局部信息**需要模型更加精细地捕捉短距离依赖，而 RoPE 默认的旋转频率可能不足以应对。
 2. **全局信息**则需要模型在长距离依赖中保留上下文，但固定的旋转幅度可能导致对全局信息的关注不足。
 
-### **解决方案：引入多尺度高斯核**
+你说得对！**高斯核函数 $K(m)$** 的作用应该是在 **cos 和 sin** 操作之后，作为对旋转嵌入的一个整体缩放因子，而不是直接作用在 $r$ 上。也就是说，$K(m)$ 控制整体的旋转频率，决定模型对不同位置之间依赖的聚焦程度。这样更符合我们希望通过 **多尺度高斯核** 动态调整 RoPE 的目标。
 
-我们可以通过将**多尺度高斯核函数**引入到 RoPE 中，使其旋转幅度根据输入位置的不同距离动态调整。这可以让 RoPE 自适应地处理局部和全局信息。
+### **最终正确的公式**
 
-好的！让我给出一个完整的公式，将 **多尺度高斯核** 与 **RoPE** 相结合，并使用标准的数学符号表示法来呈现。
+我们可以把高斯核 $K(m)$ 作为 **旋转嵌入操作的整体缩放因子**，作用在整个旋转嵌入矩阵外。这意味着高斯核控制 RoPE 在不同相对位置 $r$ 的感知能力。
 
-### **RoPE 的基础公式**
-
-RoPE 的旋转嵌入公式是基于偶数维和奇数维度的旋转。给定一个输入向量 $ x $ 和它的位置 $ m $，RoPE 在第 $ i $ 个维度上的位置嵌入公式为：
+因此，RoPE 和多尺度高斯核结合后的完整公式应该是：
 
 $$
-f(x, m) = \left( x_{2i}, x_{2i+1} \right) \cdot \begin{pmatrix} \cos(m \cdot \theta_i) & -\sin(m \cdot \theta_i) \\ \sin(m \cdot \theta_i) & \cos(m \cdot \theta_i) \end{pmatrix}
+f(x, r) = K(r) \cdot \left[ \left( x_{2i}, x_{2i+1} \right) \cdot \begin{pmatrix} \cos(r \cdot \theta_i) & -\sin(r \cdot \theta_i) \\ \sin(r \cdot \theta_i) & \cos(r \cdot \theta_i) \end{pmatrix} \right]
 $$
 
-其中：
-- $ x_{2i} $ 和 $ x_{2i+1} $ 分别是输入向量 $ x $ 的偶数和奇数维度。
-- $ m $ 是位置索引。
-- $ \theta_i = 10000^{-2i/d} $，其中 $ d $ 是嵌入维度。
+### **公式解释**
 
-### **引入多尺度高斯核的公式**
+- **$r = |m_q - m_k|$**：表示查询向量 $q$ 和键向量 $k$ 的相对位置。
+- **旋转矩阵**：$\begin{pmatrix} \cos(r \cdot \theta_i) & -\sin(r \cdot \theta_i) \\ \sin(r \cdot \theta_i) & \cos(r \cdot \theta_i) \end{pmatrix}$ 负责对输入向量的偶数维度和奇数维度进行旋转操作，编码相对位置信息。
+- **高斯核 $K(r)$**：乘在旋转操作的外部，作用是动态调整整个旋转操作的幅度，根据相对位置的距离来控制局部和全局信息的感知。
 
-为了增强 RoPE 的自适应能力，我们通过 **多尺度高斯核** 来动态调整旋转频率 $ \theta_i $。这意味着我们将每个位置的旋转幅度乘以一个多尺度高斯核函数 $ K(m) $，其定义为：
+### **多尺度高斯核的定义**
 
-$$
-K(m) = \alpha_1 \exp\left(-\frac{m^2}{2\sigma_1^2}\right) + \alpha_2 \exp\left(-\frac{m^2}{2\sigma_2^2}\right)
-$$
-
-其中：
-- $ \alpha_1 $ 和 $ \alpha_2 $ 是控制局部和全局信息的权重。
-- $ \sigma_1 $ 控制局部信息的感知范围，$ \sigma_2 $ 控制全局信息的感知范围。
-- $ m $ 是输入向量的位置索引。
-
-### **完整公式**
-
-将高斯核函数 $ K(m) $ 融入到 RoPE 的旋转嵌入公式中，我们得到如下的完整公式：
+高斯核 $K(r)$ 的定义保持不变，用于根据相对距离 $r$ 动态调整 RoPE 的旋转幅度：
 
 $$
-f(x, m) = \left( x_{2i}, x_{2i+1} \right) \cdot \begin{pmatrix} \cos(K(m) \cdot m \cdot \theta_i) & -\sin(K(m) \cdot m \cdot \theta_i) \\ \sin(K(m) \cdot m \cdot \theta_i) & \cos(K(m) \cdot m \cdot \theta_i) \end{pmatrix}
+K(r) = \alpha_1 \exp\left(-\frac{r^2}{2\sigma_1^2}\right) + \alpha_2 \exp\left(-\frac{r^2}{2\sigma_2^2}\right)
 $$
 
-### **分步解释**
-1. **RoPE 的基础部分**：
-   - RoPE 的旋转嵌入通过位置索引 $ m $ 和旋转频率 $ \theta_i $ 作用于每个偶数和奇数维度的向量元素。
-   - 旋转矩阵基于位置 $ m $ 来调整向量 $ x $ 的几何位置，从而将位置信息编码进向量表示中。
+- **$\alpha_1$** 和 **$\alpha_2$**：分别控制不同尺度的权重，分别对应局部和全局信息的感知。
+- **$\sigma_1$** 和 **$\sigma_2$**：控制局部和全局信息的感知范围。
 
-2. **多尺度高斯核的影响**：
-   - 多尺度高斯核函数 $ K(m) $ 动态调整旋转幅度，使得模型在处理不同距离的依赖关系时具有自适应能力。
-   - 当位置 $ m $ 较小（局部信息）时，$ K(m) $ 使得旋转角度偏向局部，而当位置 $ m $ 较大（全局信息）时，$ K(m) $ 则增强模型对全局信息的感知。
+### **总结改进后的公式**
 
-3. **高斯核的影响范围**：
-   - 高斯核通过参数 $ \sigma_1 $ 和 $ \sigma_2 $ 来控制感知范围，较小的 $ \sigma_1 $ 强调局部特征，而较大的 $ \sigma_2 $ 则用来处理长距离依赖。
+最终的公式在形式上是：
+$$
+f(x, r) = K(r) \cdot \left[ \left( x_{2i}, x_{2i+1} \right) \cdot \begin{pmatrix} \cos(r \cdot \theta_i) & -\sin(r \cdot \theta_i) \\ \sin(r \cdot \theta_i) & \cos(r \cdot \theta_i) \end{pmatrix} \right]
+$$
 
-### **实现：结合多尺度高斯核的 RoPE**
+### **解释如何工作**
 
-我们现在来实现一个基于多尺度高斯核优化的 **Rotary Position Embedding (RoPE)**，这可以通过简单的调整代码来实现。
+1. **相对位置 $r$**：定义为 $r = |m_q - m_k|$，即查询向量和键向量之间的相对距离。RoPE 的目标是对这种相对位置进行编码。
+   
+2. **旋转矩阵**：使用标准的 RoPE 旋转矩阵，基于相对位置 $r$ 和频率 $\theta_i$ 对偶数维度和奇数维度的元素进行旋转，嵌入相对位置信息。
 
-#### **代码实现**
+3. **高斯核 $K(r)$**：高斯核通过控制 RoPE 的旋转频率，起到调整模型感知范围的作用。当 $r$ 较小时，高斯核将加强局部信息的处理能力；当 $r$ 较大时，高斯核将增强对全局信息的处理能力。
+
+### **为什么这样处理更合理**
+
+1. **高斯核调节整体旋转操作**：把高斯核 $K(r)$ 作用在旋转嵌入的外部，相当于在不同相对位置下整体调节模型对局部和全局信息的聚焦程度，而不是直接影响旋转频率本身。这使得模型在处理不同距离的依赖时更加灵活。
+
+2. **局部和全局信息自适应调节**：通过高斯核的两项 $\alpha_1$ 和 $\alpha_2$，我们可以为局部和全局信息定义不同的感知尺度，进而让模型在不同的相对距离下自动切换。
+
+### **实现 Python 代码**
+
+根据这个新的公式，我们可以更新之前的 Python 实现，将高斯核 $K(r)$ 作用在 `cos` 和 `sin` 的外部。
 
 ```python
 import torch
@@ -104,14 +100,14 @@ import torch.nn as nn
 import math
 
 # 定义高斯核函数
-def gaussian_kernel(m, alpha1, alpha2, sigma1, sigma2):
+def gaussian_kernel(r, alpha1, alpha2, sigma1, sigma2):
     """通过多尺度高斯核调整旋转幅度"""
-    return alpha1 * torch.exp(-m**2 / (2 * sigma1**2)) + alpha2 * torch.exp(-m**2 / (2 * sigma2**2))
+    return alpha1 * torch.exp(-r**2 / (2 * sigma1**2)) + alpha2 * torch.exp(-r**2 / (2 * sigma2**2))
 
 # 定义RoPE旋转位置嵌入的辅助函数
-def apply_rotary_pos_emb(x, cos, sin):
-    """对输入向量x应用旋转位置嵌入，基于cos和sin表进行旋转"""
-    return (x * cos) + (rotate_half(x) * sin)
+def apply_rotary_pos_emb(x, cos, sin, K_r):
+    """对输入向量x应用旋转位置嵌入，基于cos和sin表进行旋转，并乘以高斯核"""
+    return K_r * ((x * cos) + (rotate_half(x) * sin))
 
 # 用于处理偶数维度与奇数维度的旋转
 def rotate_half(x):
@@ -136,20 +132,22 @@ class RotaryEmbedding(nn.Module):
         seq_len = k.shape[-2]
         t = torch.arange(seq_len, device=k.device).type_as(self.inv_freq)
 
-        # 计算旋转角度频率并应用多尺度高斯核调整
+        # 计算旋转角度频率
         freqs = torch.einsum('i,j->ij', t, self.inv_freq)
-        m = torch.arange(seq_len, device=k.device).type_as(freqs)  # 用于调整旋转幅度
-        K_m = gaussian_kernel(m, self.alpha1, self.alpha2, self.sigma1, self.sigma2)
-        freqs *= K_m.unsqueeze(-1)  # 应用高斯核调整
-
         emb = torch.cat((freqs, freqs), dim=-1)  # [seq_len, dim]
 
         # 计算cos和sin表
         cos = emb.cos()[None, :, :]  # 添加batch维度
         sin = emb.sin()[None, :, :]
 
-        # 将旋转嵌入应用到查询和键
-        return apply_rotary_pos_emb(q, cos, sin), apply_rotary_pos_emb(k, cos, sin)
+        # 计算相对位置 r
+        r = torch.arange(seq_len, device=k.device).type_as(freqs)
+
+        # 使用高斯核计算K(r)
+        K_r = gaussian_kernel(r, self.alpha1, self.alpha2, self.sigma1, self.sigma2)
+
+        # 将旋转嵌入应用到查询和键，并乘以高斯核
+        return apply_rotary_pos_emb(q, cos, sin, K_r), apply_rotary_pos_emb(k, cos, sin, K_r)
 
 # 示例使用
 if __name__ == "__main__":
@@ -176,20 +174,6 @@ if __name__ == "__main__":
     print("键嵌入后的结果：", key_rotated)
 ```
 
-### **代码说明**
+总结
 
-1. **高斯核函数**：`gaussian_kernel` 定义了多尺度的高斯核，通过参数 $$ \alpha_1 $$、$$ \alpha_2 $$ 控制不同尺度的权重，$$ \sigma_1 $$ 和 $$ \sigma_2 $$ 控制局部和全局信息的感知范围。
-2. **RoPE 基础实现**：`RotaryEmbedding` 类实现了基于 RoPE 的位置嵌入，并通过多尺度高斯核调整旋转幅度。
-3. **代码应用**：在运行示例中，你可以调整不同的高斯核参数，观察模型在不同场景下对局部和全局信息的自适应调整。
-
-### **结论**
-
-通过将多尺度高斯核函数与 RoPE 结合，我们成功地提升了 RoPE 的自适应能力，使其能够更灵活地处理局部和全局信息。此方法为自注意力机制提供了更强的感知能力，尤其适用于长序列任务中的局部与全局依赖关系处理。
-
-这项技术不仅能够提升 Transformer 模型的表现，还为如何平衡不同尺度的信息提供了新的思路。在未来的工作中，我们可以继续探索不同核函数的组合，以及如何自适应地调节这些核函数的参数，以应对更复杂的序列任务。
-
---- 
-
-### **总结思考**
-- RoPE 的优势在于它能够以一种轻量级的方式为自注意力机制引入相对位置信息。
-- 通过结合多尺度高斯核，RoPE 的局部和全局信息感知能力得到了显著提升，适用于长文本处理任务。
+通过将高斯核 $K(r)$ 乘在 `cos` 和 `sin` 的外面，我们可以在旋转操作之后调整整体的旋转幅度，从而让 RoPE 更加灵活地处理局部和全局信息。这种方法让模型能够根据相对位置信息自动调节感知范围，增强了模型在不同位置依赖下的表现。
