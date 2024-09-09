@@ -350,9 +350,9 @@ where $w_v$ could be based on node centrality measures.
 
 ### 7.2 Graph Coarsening
 
-Graph coarsening involves creating a hierarchy of graphs $\mathcal{G}_0, \mathcal{G}_1, ..., \mathcal{G}_L$ where each $\mathcal{G}_l$ is a coarsened version of $\mathcal{G}_{l-1}$. One approach is to use multilevel partitioning:
+Graph coarsening involves creating a hierarchy of graphs $$\mathcal{G}_0, \mathcal{G}_1, ..., \mathcal{G}_L$$ where each $$\mathcal{G}_l$$ is a coarsened version of $$\mathcal{G}_{l-1}$$. One approach is to use multilevel partitioning:
 
-1. Matching: Find a maximal independent edge set $\mathcal{M}_l$ in $\mathcal{G}_l$.
+1. Matching: Find a maximal independent edge set $$\mathcal{M}_l$$ in $$\mathcal{G}_l$$.
 2. Contraction: Create $\mathcal{G}_{l+1}$ by contracting the edges in $\mathcal{M}_l$.
 3. Embedding: Compute embeddings for $\mathcal{G}_L$ using any node embedding method.
 4. Refinement: Propagate embeddings from $\mathcal{G}_{l+1}$ to $\mathcal{G}_l$ and refine using local information.
