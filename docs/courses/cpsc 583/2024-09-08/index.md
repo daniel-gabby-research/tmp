@@ -201,7 +201,7 @@ GCNs use the following layer-wise propagation rule:
 
 $$\mathbf{H}^{(l+1)} = \sigma(\tilde{\mathbf{D}}^{-\frac{1}{2}}\tilde{\mathbf{A}}\tilde{\mathbf{D}}^{-\frac{1}{2}}\mathbf{H}^{(l)}\mathbf{W}^{(l)})$$
 
-where $ \tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I}_N $ is the adjacency matrix with self-connections, $ \tilde{\mathbf{D}}_{ii} = \sum_{j} \tilde{\mathbf{A}}_{ij} $, and $ \mathbf{W}^{(l)} $ is a layer-specific trainable weight matrix.
+where $$ \tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I}_N $$ is the adjacency matrix with self-connections, $$\tilde{\mathbf{D}}_{ii} = \sum_{j} \tilde{\mathbf{A}}_{ij},$$ and $\mathbf{W}^{(l)}$ is a layer-specific trainable weight matrix.
 
 For node classification, the loss function is typically cross-entropy:
 
@@ -326,7 +326,7 @@ m_v^{(t+1)} &= \sum_{w \in \mathcal{N}(v)} \mathcal{M}_t(h_v^t, h_w^t, e_{vw}) \
 h_v^{(t+1)} &= \mathcal{U}_t(h_v^t, m_v^{(t+1)})
 \end{aligned}$$
 
-where $\mathcal{M}_t$ is the message function, $\mathcal{U}_t$ is the update function, and $e_{vw}$ are edge features.
+where $$\mathcal{M}_t$$ is the message function, $$\mathcal{U}_t$$ is the update function, and $$e_{vw}$$ are edge features.
 
 For graph-level outputs, a readout function is used:
 
