@@ -3,7 +3,7 @@ layout: default
 parent: CPSC 583 Deep Learning on Graph-Structured Data
 grand_parent: Courses at Yale
 title: "Representation Learning on Graphs: Methods and Applications"
-nav_order: 1
+nav_order: 2
 discuss: true
 math: katex
 ---
@@ -48,14 +48,14 @@ Shallow embedding methods learn embeddings directly, without using deep neural n
 
 $\mathrm{ENC}(v_i) = \mathbf{Z} \mathbf{v}_i$
 
-Where $\mathbf{Z} \in \mathbb{R}^{d\times|V|}$ is a matrix containing the embedding vectors for all nodes, and $v_i \in \mathbb{I}^{|V|}$ is a one-hot indicator vector.
+Where $\mathbf{Z} \in \mathbb{R}^{d \times \vert V \vert}$ is a matrix containing the embedding vectors for all nodes, and $v_i \in \mathbb{I}^{\vert V \vert}$ is a one-hot indicator vector.
 
 Here's a comparison of some popular shallow embedding approaches:
 
 | Method | Decoder | Similarity Measure | Loss Function |
 |--------|---------|-------------------|---------------|
 | Laplacian Eigenmaps | $\|\mathbf{z}_i - \mathbf{z}_j\|^2_2$ | general | $\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) \cdot s_\mathcal{G}(v_i, v_j)$ |
-| Graph Factorization | $\mathbf{z}_i^\top \mathbf{z}_j$ | $A_{ij}$ | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
+| Graph Factorization | $\mathbf{z}_i^\top \mathbf{z}_j$ | $\mathbf{A}_{ij}$ | $\|\mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
 | GraRep | $\mathbf{z}_i^\top \mathbf{z}_j$ | $\mathbf{A}_{ij}, \mathbf{A}^2_{ij}, ..., \mathbf{A}^k_{ij}$ | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
 | HOPE | $\mathbf{z}_i^\top \mathbf{z}_j$ | general | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
 | DeepWalk | $\frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)}$ | $p_\mathcal{G}(v_j\|v_i)$ | $-s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j))$ |
@@ -137,7 +137,7 @@ where $d_{tx}$ is the shortest path distance between nodes $t$ and $x$.
 
 Before diving into generalized encoder-decoder architectures, it's important to understand the limitations of shallow embedding methods:
 
-1. Lack of parameter sharing: Each node has its own unique embedding vector, leading to $\mathcal{O}(|\mathcal{V}|)$ parameters.
+1. Lack of parameter sharing: Each node has its own unique embedding vector, leading to $\mathcal{O}(\vert \mathcal{V} \vert)$ parameters.
 2. Inability to leverage node attributes: Many graphs have rich attribute information that shallow methods ignore.
 3. Transductive nature: These methods can't generate embeddings for nodes unseen during training.
 
@@ -167,8 +167,8 @@ where $s_i$ is the PPMI vector for node $v_i$.
 
 SDNE uses a deep autoencoder to preserve both first-order and second-order proximities:
 
-1. First-order proximity: $\mathcal{L}_{1st} = \sum_{(i,j) \in \mathcal{E}} \mathbf{A}_{ij}\|\mathbf{z}_i - \mathbf{z}_j\|^2_2$
-2. Second-order proximity: $\mathcal{L}_{2nd} = \sum_{i=1}^{|\mathcal{V}|} \|(\hat{s_i} - s_i) \odot b_i\|^2_2$
+1. First-order proximity: $\mathcal{L}_{1st} = \sum_{(i,j) \in \mathcal{E}} \mathbf{A}_{ij} \Vert \mathbf{z}_i - \mathbf{z}_j \Vert^2_2$
+2. Second-order proximity: $\mathcal{L}_{2nd} = \sum_{i=1}^{\vert \mathcal{V} \vert} \Vert (\hat{s_i} - s_i) \odot b_i \Vert^2_2$
 
 where $\hat{s_i} = \mathrm{DEC}(\mathrm{ENC}(s_i))$, $s_i$ is the adjacency vector of node $v_i$, and $b_i$ is a weight vector.
 
@@ -266,7 +266,7 @@ where $\tau$ indexes the edge type and $A_\tau$ is a learned parameter specific 
 
 For heterogeneous graphs, the DeepWalk idea can be extended by defining type-specific random walks. The objective becomes:
 
-$$\max_\mathbf{Z} \sum_{v_i \in V} \sum_{\tau \in T} \sum_{-w \leq j \leq w, j \neq 0} \log P(v_{i+j}^\tau | v_i)$$
+$$\max_\mathbf{Z} \sum_{v_i \in V} \sum_{\tau \in T} \sum_{-w \leq j \leq w, j \neq 0} \log P(v_{i+j}^\tau \mid v_i)$$
 
 where $T$ is the set of node types and $v_{i+j}^\tau$ is a node of type $\tau$ at position $i+j$ in the random walk.
 
@@ -280,7 +280,7 @@ The skip-gram objective is then applied to these metapath-based random walks.
 
 For graphs with multiple layers (e.g., protein-protein interactions in different tissues), methods like OhmNet have been proposed. OhmNet uses a regularization term to tie embeddings of the same node across different layers:
 
-$$L_{reg} = \lambda \sum_{v_i \in V} \sum_{l,m \in L} \|z_i^l - z_i^m\|^2$$
+$$L_{reg} = \lambda \sum_{v_i \in V} \sum_{l,m \in L} \Vert z_i^l - z_i^m \Vert^2$$
 
 where $L$ is the set of layers and $z_i^l$ is the embedding of node $i$ in layer $l$.
 
