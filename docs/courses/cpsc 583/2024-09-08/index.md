@@ -54,10 +54,10 @@ Here's a comparison of some popular shallow embedding approaches:
 
 | Method | Decoder | Similarity Measure | Loss Function |
 |--------|---------|-------------------|---------------|
-| Laplacian Eigenmaps | $\|\mathbf{z}_i - \mathbf{z}_j\|^2_2$ | general | $\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) \cdot s_\mathcal{G}(v_i, v_j)$ |
-| Graph Factorization | $\mathbf{z}_i^\top \mathbf{z}_j$ | $\mathbf{A}_{ij}$ | $\|\mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
-| GraRep | $\mathbf{z}_i^\top \mathbf{z}_j$ | $\mathbf{A}_{ij}, \mathbf{A}^2_{ij}, ..., \mathbf{A}^k_{ij}$ | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
-| HOPE | $\mathbf{z}_i^\top \mathbf{z}_j$ | general | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
+| Laplacian Eigenmaps | $ \|\mathbf{z}_i - \mathbf{z}_j\|^2_2 $ | general | $ \mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) \cdot s_\mathcal{G}(v_i, v_j) $ |
+| Graph Factorization | $ \mathbf{z}_i^\top \mathbf{z}_j $ | $ \mathbf{A}_{ij} $ | $ \|\mathrm{DEC}(\mathbf{z}_{i}, \mathbf{z}_{j}) - s_\mathcal{G}(v_i, v_j)\|^2_2 $ |
+| GraRep | $ \mathbf{z}_i^\top \mathbf{z}_j $ | $ \mathbf{A}_{ij}, \mathbf{A}^2_{ij}, ..., \mathbf{A}^k_{ij} $ | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
+| HOPE | $ \mathbf{z}_i^\top \mathbf{z}_j $ | general | $\|\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j) - s_\mathcal{G}(v_i, v_j)\|^2_2$ |
 | DeepWalk | $\frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)}$ | $p_\mathcal{G}(v_j\|v_i)$ | $-s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j))$ |
 | node2vec | $\frac{\exp(\mathbf{z}_i^\top \mathbf{z}_j)}{\sum_k \exp(\mathbf{z}_i^\top \mathbf{z}_k)}$ | $p_\mathcal{G}(v_j\|v_i)$ (biased) | $-s_\mathcal{G}(v_i, v_j) \log(\mathrm{DEC}(\mathbf{z}_i, \mathbf{z}_j))$ |
 
@@ -198,7 +198,7 @@ GCNs use the following layer-wise propagation rule:
 
 $$\mathbf{H}^{(l+1)} = \sigma(\tilde{\mathbf{D}}^{-\frac{1}{2}}\tilde{\mathbf{A}}\tilde{\mathbf{D}}^{-\frac{1}{2}}\mathbf{H}^{(l)}\mathbf{W}^{(l)})$$
 
-where $\tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I}_N$ is the adjacency matrix with self-connections, $\tilde{\mathbf{D}}_{ii} = \sum_j \tilde{\mathbf{A}}_{ij}$, and $\mathbf{W}^{(l)}$ is a layer-specific trainable weight matrix.
+where $ \tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I}_N $ is the adjacency matrix with self-connections, $ \tilde{\mathbf{D}}_{ii} = \sum_{j} \tilde{\mathbf{A}}_{ij} $, and $ \mathbf{W}^{(l)} $ is a layer-specific trainable weight matrix.
 
 For node classification, the loss function is typically cross-entropy:
 
