@@ -85,7 +85,7 @@ $$
 
 ### Multi-hop Aggregation
 
-By stacking \( K \) layers, GraphSAGE captures information from \( K \)-hop neighborhoods. The final embedding of node \( v \) is:
+By stacking $ K $ layers, GraphSAGE captures information from $ K $-hop neighborhoods. The final embedding of node $ v $ is:
 
 $$
 \mathbf{z}_v = \mathbf{h}_v^K.
@@ -159,6 +159,78 @@ where $ \sigma $ is the sigmoid function.
 2. **Aggregation Function Impact**: The choice of aggregator affects performance. The pooling aggregator often yields the best results due to its ability to capture complex neighborhood features.
 
 3. **Scalability**: Demonstrated the ability to scale to graphs with millions of nodes and edges.
+
+---
+
+## Theoretical Analysis: Expressive Capabilities of GraphSAGE
+
+In addition to its practical advantages, GraphSAGE has been the subject of theoretical analysis to understand its expressive power in capturing graph structural properties. A key question is whether GraphSAGE, which inherently relies on node features and neighborhood aggregation, can learn complex structural patterns such as the **clustering coefficient** of a node—a measure of how close its neighbors are to being a complete graph (i.e., how tightly knit a node's local neighborhood is).
+
+### Clustering Coefficient
+
+For a given node $ v $, the clustering coefficient $ c_v $ is defined as:
+
+$$
+c_v = \frac{2T_v}{k_v (k_v - 1)},
+$$
+
+where:
+
+- $ T_v $ is the number of triangles through node $ v $.
+- $ k_v $ is the degree of node $ v $.
+
+The clustering coefficient quantifies the likelihood that a node's neighbors are also connected to each other, reflecting the local cohesiveness of the graph around $ v $.
+
+### Theorem 1: Approximating Clustering Coefficients with GraphSAGE
+
+**Statement of Theorem 1:**
+
+*Let $ G = (V, E) $ be an undirected graph where each node $ v \in V $ has a feature vector $ \mathbf{x}_v \in U \subset \mathbb{R}^d $, with $ U $ being a compact subset of $ \mathbb{R}^d $. Suppose there exists a fixed positive constant $ C \in \mathbb{R}^+ $ such that $ \| \mathbf{x}_v - \mathbf{x}_{v'} \|_2 > C $ for all pairs of nodes $ v \neq v' $. Then, for any $ \varepsilon > 0 $, there exists a parameter setting $ \Theta^* $ for GraphSAGE (Algorithm 1) such that after $ K = 4 $ iterations, the output $ z_v \in \mathbb{R} $ satisfies:*
+
+$$
+| z_v - c_v | < \varepsilon, \quad \forall v \in V,
+$$
+
+*where $ c_v $ is the clustering coefficient of node $ v $.*
+
+**Interpretation:**
+
+Theorem 1 asserts that GraphSAGE can approximate the clustering coefficients of nodes in a graph to any desired degree of accuracy, provided certain conditions are met:
+
+- **Distinct Node Features**: The condition $ \| \mathbf{x}_v - \mathbf{x}_{v'} \|_2 > C $ ensures that each node has a unique feature representation, preventing ambiguity during the learning process.
+- **Sufficient Depth**: With at least $ K = 4 $ layers, GraphSAGE can capture the necessary neighborhood information to compute clustering coefficients.
+- **Parameter Existence**: There exists a parameter setting $ \Theta^* $ (weights and biases in the aggregation functions) that enables this approximation.
+
+### Implications of Theorem 1
+
+- **Expressive Power**: The theorem demonstrates that GraphSAGE is not limited to propagating and transforming node features but can also infer and encode structural properties of the graph.
+- **Feature Dependency**: The reliance on distinct node features highlights the importance of informative input features. In cases where node features are not inherently unique or informative, additional preprocessing or feature engineering may be necessary.
+- **Model Depth**: The requirement of at least four aggregation layers suggests a trade-off between model depth and computational efficiency. Deeper models can capture more complex structures but may introduce challenges such as overfitting or increased training time.
+
+### Discussion
+
+The proof of Theorem 1 leverages properties of the **pooling aggregator**, which is capable of capturing complex, non-linear relationships in the aggregated neighborhood information. Specifically, the pooling operation (e.g., max or average pooling after a non-linear transformation) allows the model to distinguish between different neighborhood configurations.
+
+This theoretical result provides insight into why GraphSAGE with pooling aggregators often outperforms models using simpler aggregators like mean or GCN-based methods. The pooling aggregator's ability to capture higher-order structural motifs contributes to a richer and more expressive node representation.
+
+### Practical Considerations
+
+- **Node Feature Design**: In practice, ensuring that node features are distinct and informative may not always be feasible. Augmenting features with unique identifiers or positional encodings could help satisfy the conditions of the theorem.
+- **Aggregation Function Choice**: Selecting an appropriate aggregator is crucial. The pooling aggregator's success in approximating clustering coefficients suggests it may be more effective for tasks requiring sensitivity to complex neighborhood structures.
+- **Model Complexity**: While deeper models can capture more intricate patterns, they also require more computational resources and may be prone to overfitting. Techniques like dropout, regularization, and careful hyperparameter tuning become important.
+
+---
+
+## Key Takeaways from the Theoretical Analysis
+
+- **Graph Structural Learning**: GraphSAGE is theoretically capable of learning complex structural properties of graphs, not just propagating node features.
+- **Expressive Aggregators**: The choice of aggregator function significantly impacts the model's ability to capture graph topology.
+- **Feature Uniqueness**: Distinct and well-separated node features enhance the model's capacity to learn structural patterns.
+- **Model Depth Matters**: Sufficient aggregation layers are necessary to capture higher-order structures, but this comes with increased computational costs.
+
+---
+
+By understanding the theoretical underpinnings of GraphSAGE's expressive capabilities, practitioners can make informed decisions about model architecture, aggregator selection, and feature design to maximize performance on their specific tasks.
 
 ---
 
