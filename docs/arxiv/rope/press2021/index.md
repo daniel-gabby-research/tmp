@@ -59,7 +59,7 @@ $$
 Where $ f_\rho(i - j) $ is a decay function defined as:
 
 $$
-f_\rho(i - j) = \exp\left(-\frac{|i - j|}{\rho}\right)
+f_\rho(i - j) = \exp\left(-\frac{\vert i - j \vert}{\rho}\right)
 $$
 
 - $ \rho $ controls the rate of decay:
@@ -71,7 +71,7 @@ $$
 The attention scores now become:
 
 $$
-A_{ij} = \frac{Q_i K_j^\top}{\sqrt{d}} + m_h (i - j) \exp\left(-\frac{|i - j|}{\rho}\right)
+A_{ij} = \frac{Q_i K_j^\top}{\sqrt{d}} + m_h (i - j) \exp\left(-\frac{\vert i - j \vert}{\rho}\right)
 $$
 
 This modification ensures that the bias term's influence reduces for tokens beyond the receptive field determined by $ \rho $.
@@ -80,12 +80,12 @@ This modification ensures that the bias term's influence reduces for tokens beyo
 
 #### 5.1 Effect of the Receptive Field Parameter $ \rho $
 
-- **Local Attention**: With a small $ \rho $, the bias term becomes negligible for larger $ |i - j| $, making the model focus on nearby tokens.
+- **Local Attention**: With a small $ \rho $, the bias term becomes negligible for larger $ \vert i - j \vert $, making the model focus on nearby tokens.
 - **Global Attention**: A large $ \rho $ maintains the bias term's influence over longer distances, enabling the model to capture global dependencies.
 
 #### 5.2 Comparison with Original ALiBi
 
-The original ALiBi can be viewed as a special case where $ \rho \to \infty $, resulting in $ \exp\left(-\frac{|i - j|}{\rho}\right) \approx 1 $, and the bias term does not decay with distance.
+The original ALiBi can be viewed as a special case where $ \rho \to \infty $, resulting in $ \exp\left(-\frac{\vert i - j \vert}{\rho}\right) \approx 1 $, and the bias term does not decay with distance.
 
 ### 6. Alternative Decay Functions
 
@@ -102,7 +102,7 @@ $$
 #### 6.2 Reciprocal Decay
 
 $$
-f_\rho(i - j) = \frac{\rho}{\rho + |i - j|}
+f_\rho(i - j) = \frac{\rho}{\rho + \vert i - j \vert}
 $$
 
 - Offers a slower decay than the exponential function, balancing between local and global attention.
@@ -123,7 +123,7 @@ $$
 Similar to the head-specific slopes $ m_h $, we can define head-specific receptive fields $ \rho_h $:
 
 $$
-B_{ij} = m_h (i - j) \exp\left(-\frac{|i - j|}{\rho_h}\right)
+B_{ij} = m_h (i - j) \exp\left(-\frac{\vert i - j \vert}{\rho_h}\right)
 $$
 
 - Different heads can focus on different ranges, enhancing the model's capacity to capture various positional dependencies.
@@ -150,7 +150,7 @@ Introducing a decay function aligns with the intuition that dependencies between
 
 #### 11.1 Computational Efficiency
 
-- The decay function $ \exp\left(-\frac{|i - j|}{\rho}\right) $ is computationally inexpensive and can be precomputed.
+- The decay function $ \exp\left(-\frac{\vert i - j \vert}{\rho}\right) $ is computationally inexpensive and can be precomputed.
 - Efficient implementation ensures minimal impact on training and inference speed.
 
 #### 11.2 Initialization and Regularization
