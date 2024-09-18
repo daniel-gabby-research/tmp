@@ -50,13 +50,13 @@ This bias term decreases linearly with the increase in relative distance $ i - j
 
 ### 3. Introducing a Receptive Field Parameter
 
-To incorporate a receptive field into ALiBi, we can modify the bias term to include a decay function that diminishes the bias effect as the distance between tokens increases beyond a certain threshold. One way to achieve this is by introducing an exponential decay controlled by a **receptive field parameter** \( \rho \):
+To incorporate a receptive field into ALiBi, we can modify the bias term to include a decay function that diminishes the bias effect as the distance between tokens increases beyond a certain threshold. One way to achieve this is by introducing an exponential decay controlled by a **receptive field parameter** $ \rho $:
 
 $$
 B_{ij} = m_h (i - j) \cdot f_\rho(i - j)
 $$
 
-Where \( f_\rho(i - j) \) is a decay function defined as:
+Where $ f_\rho(i - j) $ is a decay function defined as:
 
 $$
 f_\rho(i - j) = \exp\left(-\frac{|i - j|}{\rho}\right)
