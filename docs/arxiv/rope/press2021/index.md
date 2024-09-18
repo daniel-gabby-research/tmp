@@ -30,23 +30,23 @@ $$
 
 Where:
 
-- \( Q_i \) and \( K_j \) are the query and key vectors at positions \( i \) and \( j \).
-- \( d \) is the dimension of the key/query vectors.
-- \( B_{ij} \) is the ALiBi bias term, defined as:
+- $ Q_i $ and $ K_j $ are the query and key vectors at positions $ i $ and $ j $.
+- $ d $ is the dimension of the key/query vectors.
+- $ B_{ij} $ is the ALiBi bias term, defined as:
 
   $$
   B_{ij} = m_h (i - j)
   $$
 
-- \( m_h \) is the negative slope for head \( h \):
+- $ m_h $ is the negative slope for head $ h $:
 
   $$
   m_h = -2^{-8(\frac{h}{H} - 1)}
   $$
 
-- \( H \) is the total number of attention heads.
+- $ H $ is the total number of attention heads.
 
-This bias term decreases linearly with the increase in relative distance \( i - j \), promoting attention to closer positions.
+This bias term decreases linearly with the increase in relative distance $ i - j $, promoting attention to closer positions.
 
 ### 3. Introducing a Receptive Field Parameter
 
@@ -62,9 +62,9 @@ $$
 f_\rho(i - j) = \exp\left(-\frac{|i - j|}{\rho}\right)
 $$
 
-- \( \rho \) controls the rate of decay:
-  - Smaller \( \rho \): Faster decay, more focus on local context.
-  - Larger \( \rho \): Slower decay, allowing attention to consider longer-range dependencies.
+- $ \rho $ controls the rate of decay:
+  - Smaller $ \rho $: Faster decay, more focus on local context.
+  - Larger $ \rho $: Slower decay, allowing attention to consider longer-range dependencies.
 
 ### 4. Modified Attention Scores with Receptive Field
 
@@ -74,18 +74,18 @@ $$
 A_{ij} = \frac{Q_i K_j^\top}{\sqrt{d}} + m_h (i - j) \exp\left(-\frac{|i - j|}{\rho}\right)
 $$
 
-This modification ensures that the bias term's influence reduces for tokens beyond the receptive field determined by \( \rho \).
+This modification ensures that the bias term's influence reduces for tokens beyond the receptive field determined by $ \rho $.
 
 ### 5. Analysis of the Modified ALiBi Bias
 
-#### 5.1 Effect of the Receptive Field Parameter \( \rho \)
+#### 5.1 Effect of the Receptive Field Parameter $ \rho $
 
-- **Local Attention**: With a small \( \rho \), the bias term becomes negligible for larger \( |i - j| \), making the model focus on nearby tokens.
-- **Global Attention**: A large \( \rho \) maintains the bias term's influence over longer distances, enabling the model to capture global dependencies.
+- **Local Attention**: With a small $ \rho $, the bias term becomes negligible for larger $ |i - j| $, making the model focus on nearby tokens.
+- **Global Attention**: A large $ \rho $ maintains the bias term's influence over longer distances, enabling the model to capture global dependencies.
 
 #### 5.2 Comparison with Original ALiBi
 
-The original ALiBi can be viewed as a special case where \( \rho \to \infty \), resulting in \( \exp\left(-\frac{|i - j|}{\rho}\right) \approx 1 \), and the bias term does not decay with distance.
+The original ALiBi can be viewed as a special case where $ \rho \to \infty $, resulting in $ \exp\left(-\frac{|i - j|}{\rho}\right) \approx 1 $, and the bias term does not decay with distance.
 
 ### 6. Alternative Decay Functions
 
@@ -109,18 +109,18 @@ $$
 
 ### 7. Learnable Receptive Field Parameter
 
-To make the model adaptable, \( \rho \) can be treated as a learnable parameter:
+To make the model adaptable, $ \rho $ can be treated as a learnable parameter:
 
 $$
 \rho = \text{softplus}(\theta_\rho)
 $$
 
-- The softplus function ensures \( \rho \) remains positive.
-- \( \theta_\rho \) is learned during training, allowing the model to determine the optimal receptive field size.
+- The softplus function ensures $ \rho $ remains positive.
+- $ \theta_\rho $ is learned during training, allowing the model to determine the optimal receptive field size.
 
 ### 8. Head-Specific Receptive Fields
 
-Similar to the head-specific slopes \( m_h \), we can define head-specific receptive fields \( \rho_h \):
+Similar to the head-specific slopes $ m_h $, we can define head-specific receptive fields $ \rho_h $:
 
 $$
 B_{ij} = m_h (i - j) \exp\left(-\frac{|i - j|}{\rho_h}\right)
@@ -136,8 +136,8 @@ Introducing a decay function aligns with the intuition that dependencies between
 
 #### 9.2 Flexibility and Adaptability
 
-- **Task-Specific Tuning**: Learnable \( \rho \) allows the model to adjust the receptive field based on the task's requirements.
-- **Multi-Scale Attention**: Head-specific \( \rho_h \) enables the model to simultaneously capture local and global patterns.
+- **Task-Specific Tuning**: Learnable $ \rho $ allows the model to adjust the receptive field based on the task's requirements.
+- **Multi-Scale Attention**: Head-specific $ \rho_h $ enables the model to simultaneously capture local and global patterns.
 
 ### 10. Potential Advantages
 
@@ -150,12 +150,12 @@ Introducing a decay function aligns with the intuition that dependencies between
 
 #### 11.1 Computational Efficiency
 
-- The decay function \( \exp\left(-\frac{|i - j|}{\rho}\right) \) is computationally inexpensive and can be precomputed.
+- The decay function $ \exp\left(-\frac{|i - j|}{\rho}\right) $ is computationally inexpensive and can be precomputed.
 - Efficient implementation ensures minimal impact on training and inference speed.
 
 #### 11.2 Initialization and Regularization
 
-- Proper initialization of \( \theta_\rho \) is crucial for stable training.
+- Proper initialization of $ \theta_\rho $ is crucial for stable training.
 - Regularization techniques may be applied to prevent overfitting.
 
 ### 12. Experimental Validation
@@ -172,10 +172,6 @@ By incorporating a local receptive field into ALiBi, we enhance the model's abil
 
 **Future research may explore**:
 
-- **Dynamic Receptive Fields**: Adjusting \( \rho \) based on the input sequence or layer depth.
+- **Dynamic Receptive Fields**: Adjusting $ \rho $ based on the input sequence or layer depth.
 - **Hybrid Positional Encodings**: Combining modified ALiBi with RoPE or other positional encodings.
 - **Theoretical Analysis**: Further study of the mathematical properties and potential benefits.
-
----
-
-This extension aligns with the goal of providing ALiBi with a controllable receptive field, enabling it to capture local dependencies more effectively while maintaining the ability to consider global context as needed.
