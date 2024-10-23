@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Nature Genomics 
+parent: MLSys
 title: "Cupcake: A Compression Scheduler for Scalable Communication-Efficient Distributed Training"
 nav_order: 1
 discuss: true

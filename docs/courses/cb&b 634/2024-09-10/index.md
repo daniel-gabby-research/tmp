@@ -146,6 +146,34 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
    - Constant-time access
    - Good for hierarchical data
 
+5. **Classes and Objects**
+   - User-defined types
+   - Custom methods
+   - Attributes
+```python
+class Patient:
+    def __init__(self, name, age):
+        self._name = name
+        self.age = age
+    @property
+    def age(self):
+        return self._age
+    @age.setter
+    def age(self, value):
+        if value < 0:
+            raise ValueError('age must be >= 0’)
+        self._age = value
+
+    def say_hi(self):
+        print(f'Hi, my name is {self._name}.')
+
+# this works
+p = Patient('John', 40)
+p.say_hi()
+# this raises a ValueError
+p.age = -40
+```
+
 ## 3. Advanced Data Structures
 
 ### Queue
@@ -155,15 +183,47 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
   - Request handling
   - Breadth-first search
 
+![alt text](image-5.png)
+
 ### Stack
 - Last-in, First-out (LIFO)
 - Applications:
   - Recursion
   - Depth-first search
 
+![alt text](image-6.png)
+
+### Priority Queue
+- Elements with priority
+- Applications:
+  - Scheduling
+  - Event-driven simulation
+
+*Example*:
+```python
+from heapq import heappop, heappush
+patients = []
+heappush(patients, (5, 'Smith'))
+heappush(patients, (3, 'Jones'))
+heappush(patients, (9, 'Box'))
+heappush(patients, (1, 'Wu'))
+heappush(patients, (7, 'Wong'))
+while patients:
+    print(heappop(patients))
+```
+
+*Output*:
+```
+(1, 'Wu')
+(3, 'Jones')
+(5, 'Smith')
+(7, 'Wong')
+(9, 'Box')
+```
+
 ### Trees
 1. **Basic Tree Properties**
-   - Root node
+   - Root node (no parent)
    - Parent-child relationships
    - No cycles
 
@@ -179,17 +239,66 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
    - O(log n) search time when balanced
    - Used for sorting and efficient lookups
 
+4. **Example Usage**
+   - Phylogenetic trees
+   - Decision trees
+   - $k$-nearest neighbors
+   - Implementing a priority queue
+   - Parsing XML and HTML
+
 ### Graphs
-- Collection of vertices and edges
-- Applications:
+
+- Collection of *vertices* and *edges*
+  - *Vertices*: nodes that contain data
+  - *Edges*: relationships between nodes
+
+![alt text](image-4.png)
+
+- **Applications**:
   - Protein interaction networks
   - Social networks
   - Brain connectivity
   - Language processing
 
+- **Graph Questions**:
+  - Shortest path (e.g. Dijkstra's algorithm)
+  - Avg/Max distance between vertices
+  - “Important” vertices or edges
+    - e.g. betweenness, PageRank, node influence metrics
+  - Cycles?
+  - Connected components?
+
+```python
+class Graph:
+    def __init__(self):
+        self._vertices = []
+        self._edges = []
+    def add_vertex(self, v):
+        self._vertices.append(v)
+    def add_edge(self, v1, v2, data=None):
+        if v1 in self._vertices and v2 in self._vertices:
+            self._edges.append((v1, v2, data))
+    def neighbors(self, v):
+        result = []
+        for v1, v2, data in self._edges:
+            if v1 == v:
+                result.append(v2)
+            elif v2 == v:
+                result.append(v1)
+        return result
+```
+
 ## 4. Complexity Analysis
 
 ### Big O Notation
+
+#### Definition
+
+For a given $f(x)$, we say $f(x) = O(g(x))$ if and only if there exist constants $x_0$ and $M$ such that:
+
+$$ \vert f(x) \vert \leq M g(x) \text{ for all } x \geq x_0 $$
+
+#### Interpretation
 - Measures upper bound of growth rate
 - Common complexities (from fastest to slowest):
   - O(1): Constant time
@@ -198,8 +307,43 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
   - O($n \log n$): Log-linear
   - O($n^2$): Quadratic
   - O($2^n$): Exponential
+- *Warning*: Big O notation is a *bound*, not a *value*. We can also say $f(x) \in O(g(x))$.
+
+#### Example
+$$ 3x^2 + 200x + 7 = O(x^2) $$
+>*Proof*:
+> For $x \geq 201$,
+> $$ x^2 = x \cdot x \geq 201x = 200x + x \geq 200x + 201 > 200x + 7 $$
+> Therefore for $x \geq 201$,
+> $$ 4x^2 = 3x^2 + x^2 > 3x^2 + 200x + 7 = \vert 3x^2 + 200x + 7 \vert $$
+>That is, $\vert 3x^2 + 200x + 7 \vert < Mx^2$ for all $x \geq x_0$ where $M = 4$ and $x_0 = 201$.
+
+#### Theorem
+If 
+$$ f(x) = a_mx^m + a_{m-1}x^{m-1} + \cdots + a_1x + a_0  $$
+and $a_m > 0$,
+then
+$$ f(x) = O(x^m) $$
+That is, a polynomial of degree $m$ is $O(x^m)$.
+
+### Little $o$ Notation
+#### Definition
+For a given $f(x)$, we say
+$$ f(x) = o(g(x)) $$
+if and only if for every $\epsilon > 0$, there exists $N$ such that
+$$ f(x) \leq \epsilon g(x) $$
+for all $x \geq N$.
+
+### Big $\Omega$ Notation
+#### Definition
+For a given $f(x)$, we say
+$$ f(x) = \Theta(g(x)) $$
+if and only if there exists $x_0$, $M_1$, and $M_2$ such that
+$$ M_1 g(x) \leq f(x) \leq M_2 g(x) $$
+for all $x \geq x_0$.
 
 ### Practical Considerations
+We use `time.perf_counter()` to measure execution time.
 - Memory usage vs. time tradeoffs
 - Implementation overhead
 - Data size impact
