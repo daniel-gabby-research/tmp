@@ -8,35 +8,37 @@ discuss: true
 math: katex
 ---
 
-# 1. What is informatics?
+# Introduction to Informatics
+
+## 1. What is informatics?
 
 *Informatics* is:
 
 > The study of how to *represent, store, integrate, and communicate* information and how to *apply domain knowledge* to data to deliver new insights.
 
-## 1.2 Dewey Decimal System
+### Dewey Decimal System
 - Identifiers
 - Hash-functions
     - A hash function is a function that distills an input (or 'message') and returns a fixed-size string of bytes.
     - The output is called the hash value, hash code, or simply hash.
 - Standards
 
-## 1.3 Edwin Smith Papyrus
+### Edwin Smith Papyrus
 ![alt text](image.png)
 
-## 1.4 Turing Machine
+### Turing Machine
 - Every *computable problem* can be solved using only a few operations and infinite memory.
 - Essentially all programming languages are Turing complete (except for the memory).
 - In practice, computers support more capabilities, but this is mostly for convenience and performance not for expanding the set of problems that can be solved.
 be solved.
 
-## 1.5 Information Theory
+### Information Theory
 - Electronic and optical signals degrade over time and distance
     - i.e. all communication channels are noisy
 - Claude Shannon's Noisy Channel Coding Theorem (1948) established the limits of reliable communication over noisy channels.
 - Error-detecting strategies and error-correcting codes are used to combat noise (e.g., Hamming(7,4) code)
 
-## 1.6 Electronic Health Records
+### Electronic Health Records
 - Once upon a time, health data was siloed in paper charts
     1. Not easily searchable
     2. Only one doctor could access the data
@@ -44,10 +46,10 @@ be solved.
 - Vista is the first EHR system and still in use today
 - Health Information Technology for Economic and Clinical Health (HITECH) Act of 2009
 
-## 1.7 Large Language Models
+### Large Language Models
 - Will this be a powerful tool for democratizing computer analytics?
 
-# 2. Informatics Concepts
+## 2. Informatics Concepts
 - Data/Information/Knowledge
 - Structured and unstructured data and metadata
 - Models
@@ -57,23 +59,23 @@ be solved.
 
 > Knowledge is what we need to do things correctly; wisdom is knowing the correct things to do.
 
-## 2.1 Data + Metadata + Domain Knowledge
+### Data + Metadata + Domain Knowledge = Information
 - **Data**: Raw facts or figures
 - **Metadata**: Data about data
 - **Domain Knowledge**: Knowledge about the domain
 - **Information**: Data + Metadata + Domain Knowledge
 
-### 2.1.1 Data
-- Structured: Organized in a predefined format (e.g., databases)
-- Unstructured: No predefined format (e.g., text documents)
-- Semi-structured: Somewhere in between (e.g., XML, JSON)
+#### Data
+- **Structured:** Organized in a predefined format (e.g., databases)
+- **Unstructured:** No predefined format (e.g., text documents)
+- **Semi-structured:** Somewhere in between (e.g., XML, JSON)
 
-## 2.2 Models
+### Models
 > A model is “an intellectual construct in artefact form that provides an abstract, highly formalized… simplified representation of a phenomenon and its interactions.” (Coffey and Atkinson 1996)
 
 > All models are wrong, but some are useful. (George E.P. Box)
 
-### 2.2.1 Avoid overfitting
+#### Avoid overfitting
 
 > Mayer, J., Khairy, K., & Howard, J. (2010). Drawing an elephant with four complex parameters. American Journal of Physics, 78(6), 648-649.
 
@@ -86,7 +88,7 @@ You can draw an elephant with four complex parameters. Avoid overfitting.
 
 ![alt text](image-2.png)
 
-### 2.2.2 Knowledge-based systems INTERNIST-I, Mycin (1970s)
+#### Knowledge-based systems INTERNIST-I, Mycin (1970s)
 
 - Relied on an extensive “Knowledge-Base”, effectively rules for ranking likelihood.
 
@@ -98,7 +100,9 @@ PREMISE: ($AND (SAME CNTXT GRAM GRAMNEG)
 ACTION: (CONCLUDE CNTXT IDENTITY BACTERIUDES TALLY .6)
 ```
 
-### 2.2.3 Dynamic Systems Models
+#### Dynamic Systems Models
+
+![alt text](image-4.png)
 
 $$
 \begin{aligned}
@@ -109,7 +113,7 @@ $$
 \end{aligned}
 $$
 
-#### 2.2.3.1 Hodgkin-Huxley
+##### Hodgkin-Huxley
 
 $$
 \begin{aligned}
@@ -118,12 +122,12 @@ I_{ion} &= g_{Na} m^3 h (V - V_{Na}) + g_K w^4 (V - V_K) + g_{leak} (V - V_{leak
 \end{aligned}
 $$
 
-### 2.2.3.2 Agent-based Models
+#### Agent-based Models
 - Simulate the behavior of individual agents (e.g., people) in a complex system.
 
 ![alt text](image-3.png)
 
-### 2.2.4 Statistical Models
+#### Statistical Models
 - Model selection depends on the nature of the data and research questions
     - K-nearest neighbors
     - Linear regression
@@ -131,11 +135,11 @@ $$
     - Support vector machines
     - Neural networks
 
-### 2.3 Ontologies and Terminologies
+### Ontologies and Terminologies
 - **Standardized vocabularies** for data representation
 - A systematic approach to defining and organizing concepts and their relationships
 
-#### 2.3.1 Medical Terminology
+#### Medical Terminology
 - SNOMED CT (Systematized Nomenclature of Medicine - Clinical Terms)
 - ICD-10 (International Classification of Diseases, Tenth Revision)
 - LOINC (Logical Observation Identifiers Names and Codes)
