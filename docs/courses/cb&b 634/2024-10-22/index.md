@@ -3,7 +3,7 @@ layout: default
 parent: CB&B 634 Computational Methods in Informatics
 grand_parent: Courses at Yale
 title: "2024-10-22 Iterative algorithms"
-nav_order: 30
+nav_order: 28
 discuss: true
 math: katex
 ---
