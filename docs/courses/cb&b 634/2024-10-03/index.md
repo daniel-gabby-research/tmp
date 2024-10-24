@@ -38,34 +38,48 @@ math: katex
 
 ### Univariate Analysis
 1. **Categorical Variables**
-   - Use value_counts()
+   - Use `value_counts()`
    - Visualize with bar plots
+   ![Bar Plot](image.png)
 
 2. **Continuous Variables**
-   - Basic statistics (mean, median, mode, std, min, max)
+   - Basic statistics (`mean`, `median`, `mode`, `std`, `min`, `max`)
    - Visualizations:
      - Histograms
+     ![Histogram](image-1.png)
      - Box plots (shows median, quartiles, outliers)
+     ![Box Plot](image-2.png)
      - Violin plots (distribution shape)
+     ![Violin Plot](image-3.png)
      - Q-Q plots (normality test)
+     ![Q-Q Plot](image-4.png)
 
 3. **Data Standardization**
-   - Z-score standardization: $z_i = \frac{x_i - \bar{x}}{s}$
+   - Z-score standardization: $z_i = \frac{x_i - \bar{x}}{s}$ (mean 0, std 1)
    - Min-max scaling (0 to 1)
 
 ### Bivariate/Multivariate Analysis
 - Scatter plots
+![Scatter Plot](image-6.png)
 - Correlation analysis (Pearson)
+![Pearson](image-5.png)
 - Watch for outliers
 
 ### Dimensionality Reduction
 1. **Linear Methods**
    - PCA (Principal Component Analysis): Unsupervised, linear
+     - Idea: find directions of maximum variance in high-dimensional data and project data onto these directions
+   ![PCA](image-7.png)
    - LDA (Linear Discriminant Analysis): Supervised, linear
+     - Idea: find directions that maximize class separability
+   ![LDA](image-8.png)
 
 2. **Non-linear Methods**
    - t-SNE: Unsupervised, non-linear
+     - Idea: map high-dimensional data to a 2D space for visualization
+     ![t-SNE](image-9.png)
    - UMAP: Unsupervised, non-linear
+     - Idea: similar to t-SNE, but faster and more scalable
 
 ## 2. Data Cleaning
 
@@ -82,10 +96,36 @@ math: katex
      - One value per cell
    - Use melting for restructuring
 
+   *Example:*
+
+   ```python
+   df = pd.DataFrame({
+       'id': [1, 1, 1],
+       'name': ['Alice', 'Alice', 'Alice'],
+       'math': [90, 85, 95],
+       'science': [85, 90, 88],
+       'english': [95, 92, 93]
+   })
+   # id name math science english
+   # 1 Alice 90 85 95
+   # 1 Alice 85 90 92
+   # 1 Alice 95 88 93
+   df.melt(id_vars=['id', 'name'], value_vars=['math', 'science', 'english'])
+   ```
+
+   *Output:*
+
+   ```
+   id name  variable value
+   1  Alice math      90
+   1  Alice science   85
+   1  Alice english   95
+   ```
+
 3. **Duplicate Data**
    - Check for exact duplicates
    - Verify legitimate duplicates
-   - Use drop_duplicates() with appropriate criteria
+   - Use `drop_duplicates()` with appropriate criteria
 
 4. **Incorrect Values**
    - Define valid ranges
@@ -96,13 +136,13 @@ math: katex
 ### Missing Data
 
 #### Types of Missing Data
-1. MCAR (Missing Completely At Random)
-2. MAR (Missing At Random)
-3. MNAR (Missing Not At Random)
+1. **MCAR (Missing Completely At Random)**: Reason for missing data is unrelated to any other variables in the dataset.
+2. **MAR (Missing At Random)**: Reason for missing data is related to other variables in the dataset.
+3. **MNAR (Missing Not At Random)**: Reason for missing data is related to the missing value itself.
 
 #### Handling Missing Data
 1. **Detection**
-   - Use isnull()/notnull()
+   - Use `isnull()`/`notnull()`
    - Apply Little's Test for MCAR
    - Check for MAR patterns
 
