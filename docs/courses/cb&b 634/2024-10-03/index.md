@@ -3,122 +3,124 @@ layout: default
 parent: CB&B 634 Computational Methods in Informatics
 grand_parent: Courses at Yale
 title: "2024-10-03 Data Exploration and Cleaning"
-nav_order: 26
+nav_order: 25
 discuss: true
 math: katex
 ---
 
-# Big data and parallelism
+# Data Exploration and Cleaning
 ## 0. Learning Objectives
-- Distinguish between big data analysis and traditional data analysis.
-- Give examples of types of big data arising in health.
-- Give examples of ethical challenges associated with big data in health care; identify strategies for preserving privacy.
-Explain concepts of big data analysis, including hashing and probablistic data structures.
-- Explain Amdahl's law and interpret its significance with modern HPCs with tens of thousands of processors or more.
-- Implement basic parallel algorithms using Python multiprocessing.
+- Understand the importance of exploring data and its structure before using it.
+- Explain the significance of understanding variable distribution and describe ways to visualize the distribution.
+- Look for outliers, correlated variables, and the overall distribution of data; describe why these factors are important.
+- Understand the differences between common dimensionality reduction strategies. Explain why we would use them.
+- Explain the concepts of data cleaning and imputation.
+- Explain the implications of using various imputation strategies.
+- Give examples of why health data may need cleaning.
+- Describe strategies for working with missing data, and identify the three main types of missing data.
 
-# Big Data and Parallel Algorithms
+I'll create a comprehensive but concise note covering the key concepts from the slides about data exploration and cleaning.
 
-## 1. Introduction to Big Data
-### A. Key Characteristics (5 V's)
-- **Volume**: Terabytes+ of data
-- **Velocity**: Rapid creation rate
-- **Variety**: Multiple data types (structured & unstructured)
-- **Veracity**: Quality/accuracy of data
-- **Value**: Actionability of insights
 
-### B. Challenges
-- Ethical considerations (Privacy, Consent, Bias, Truth)
-- Storage challenges
-- Data transport challenges
-- Analysis challenges
 
-## 2. Data Storage Solutions
-### A. Traditional Storage
-- SSDs
-- Tape storage
+# Data Exploration and Cleaning Notes
 
-### B. Database Types
-#### Relational Databases
-- Uses normalized tables with SQL
-- Normal Forms (1NF, 2NF, BCNF)
-- Multiple joins required
+## 1. Data Exploration
 
-#### Document Databases (NoSQL)
-- Denormalized structure
-- Efficient for common queries
-- Less efficient for non-indexed queries
+### Initial Data Understanding
+- Examine data appropriateness before starting research
+- Consider three dimensions of variables:
+  - Role (Predictor vs Target)
+  - Data type (Strings, Dates, Numbers)
+  - Nature (Categorical vs Continuous)
 
-### C. Distribution Strategies
-- Sharding: Distributes data across servers
-- Replication: Creates data copies across machines
-  - Reduces latency
-  - Protects against data loss
-  - Risk of inconsistency
+### Data Structure Assessment
+- Check data point quantity
+- Verify variable data types
+- Validate value ranges
+- Assess data completeness
+- Use pandas for type conversion when needed
 
-## 3. Big Data Analysis Techniques
-### A. Hash Functions
-- Maps data to numbers in known range
-- Example: MD5 (not cryptographically secure)
-- Universal Hashing concepts
+### Univariate Analysis
+1. **Categorical Variables**
+   - Use value_counts()
+   - Visualize with bar plots
 
-### B. Probabilistic Data Structures
-#### Bloom Filters
-- Approximate set membership
-- Space-efficient
-- Allows false positives
-- No false negatives
+2. **Continuous Variables**
+   - Basic statistics (mean, median, mode, std, min, max)
+   - Visualizations:
+     - Histograms
+     - Box plots (shows median, quartiles, outliers)
+     - Violin plots (distribution shape)
+     - Q-Q plots (normality test)
 
-#### Counting Bloom Filters
-- Extension of regular Bloom filters
-- Stores counts instead of bits
-- Tracks frequency of items
+3. **Data Standardization**
+   - Z-score standardization: $z_i = \frac{x_i - \bar{x}}{s}$
+   - Min-max scaling (0 to 1)
 
-### C. Estimation Techniques
-- Order statistics for unique items
-- Flajolet-Martin algorithm
-- HyperLogLog for cardinality estimation
+### Bivariate/Multivariate Analysis
+- Scatter plots
+- Correlation analysis (Pearson)
+- Watch for outliers
 
-## 4. Parallel Computing
-### A. Fundamentals
-- Reasons for parallelization
-  - Faster results
-  - Larger problem solving
-  - Memory distribution
-  - Improved responsiveness
+### Dimensionality Reduction
+1. **Linear Methods**
+   - PCA (Principal Component Analysis)
+   - LDA (Linear Discriminant Analysis)
 
-### B. Performance Metrics
-#### Amdahl's Law
-- Maximum speedup: 1/(1-p + p/n)
-- p: parallelizable portion
-- n: number of processors
+2. **Non-linear Methods**
+   - t-SNE
+   - UMAP
 
-#### Scaling Types
-- **Strong Scaling**: Fixed problem size
-- **Weak Scaling**: Fixed work per processor
+## 2. Data Cleaning
 
-### C. Python Multiprocessing
-#### Basic Concepts
-- Process creation and management
-- Shared memory considerations
-- Cache implications
+### Common Data Issues
+1. **Non-standardized Data**
+   - Inconsistent formats
+   - Different terminologies
+   - Use standard ontologies (MeSH, RxNorm, UMLS, etc.)
 
-#### Implementation Tools
-- `multiprocessing.Process`
-- `multiprocessing.Pool`
-- Shared memory: `Value` and `Array`
-- Manager objects for proxy objects
+2. **Structure Issues**
+   - Apply tidy data principles:
+     - One variable per column
+     - One observation per row
+     - One value per cell
+   - Use melting for restructuring
 
-### D. Best Practices
-- Focus optimization efforts
-- Ensure load balancing
-- Minimize shared state
-- Maintain result consistency
-- Centralize output operations
+3. **Duplicate Data**
+   - Check for exact duplicates
+   - Verify legitimate duplicates
+   - Use drop_duplicates() with appropriate criteria
 
-## 5. Practical Considerations
-- Evaluate necessity of parallel implementation
-- Consider debugging complexity
-- Account for setup and maintenance overhead
-- Plan for scalability
-- Monitor resource utilization
+4. **Incorrect Values**
+   - Define valid ranges
+   - Check categorical values
+   - Look for inconsistencies
+   - Examine outliers
+
+### Missing Data
+
+#### Types of Missing Data
+1. MCAR (Missing Completely At Random)
+2. MAR (Missing At Random)
+3. MNAR (Missing Not At Random)
+
+#### Handling Missing Data
+1. **Detection**
+   - Use isnull()/notnull()
+   - Apply Little's Test for MCAR
+   - Check for MAR patterns
+
+2. **Solutions**
+   - Drop rows (listwise/pairwise deletion)
+   - Drop fields (columns)
+   - Imputation methods:
+     - Deductive imputation
+     - Multiple imputation
+     - FIML (Full Information Maximum Likelihood)
+     - EM (Expectation Maximization)
+
+3. **Avoid**
+   - Simple mean/median replacement
+   - Single deterministic regression
+   - Single stochastic regression
