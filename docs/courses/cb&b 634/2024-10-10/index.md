@@ -133,14 +133,11 @@ Types:
   - Supercritical: $$\dot{x} = rx - x^3$$
     - $r > 0$: one unstable fixed point at $x = 0$, two stable fixed points at $x = \pm \sqrt{r}$
     - $r < 0$: one stable fixed point at $x = 0$
-
-![Pitchfork Supercritical](image-9.png)
-
-- Subcritical: $$\dot{x} = rx + x^3$$
-  - $r > 0$: one unstable fixed point at $x = 0$
+    ![Pitchfork Supercritical](image-9.png)
+  - Subcritical: $$\dot{x} = rx + x^3$$
+    - $r > 0$: one unstable fixed point at $x = 0$
     - $r < 0$: one stable fixed point at $x = 0$, two unstable fixed points at $x = \pm \sqrt{-r}$
-
-![Pitchfork Subcritical](image-10.png)
+    ![Pitchfork Subcritical](image-10.png)
 
 ### C. Chaos
 ![Chaos](image-12.png)
