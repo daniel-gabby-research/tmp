@@ -2,13 +2,13 @@
 layout: default
 parent: CB&B 634 Computational Methods in Informatics
 grand_parent: Courses at Yale
-title: "2024-09-17 Big Data and Parallel Algorithms"
-nav_order: 23
+title: "2024-10-03 Data Exploration and Cleaning"
+nav_order: 26
 discuss: true
 math: katex
 ---
 
-# Big Data and Parallel Algorithms
+# Big data and parallelism
 ## 0. Learning Objectives
 - Distinguish between big data analysis and traditional data analysis.
 - Give examples of types of big data arising in health.
@@ -16,6 +16,8 @@ math: katex
 Explain concepts of big data analysis, including hashing and probablistic data structures.
 - Explain Amdahl's law and interpret its significance with modern HPCs with tens of thousands of processors or more.
 - Implement basic parallel algorithms using Python multiprocessing.
+
+# Big Data and Parallel Algorithms
 
 ## 1. Introduction to Big Data
 ### A. Key Characteristics (5 V's)
@@ -32,11 +34,11 @@ Explain concepts of big data analysis, including hashing and probablistic data s
 - Analysis challenges
 
 ## 2. Data Storage Solutions
-### 2.1 Traditional Storage
+### A. Traditional Storage
 - SSDs
 - Tape storage
 
-### 2.2 Database Types
+### B. Database Types
 #### Relational Databases
 - Uses normalized tables with SQL
 - Normal Forms (1NF, 2NF, BCNF)
@@ -47,7 +49,7 @@ Explain concepts of big data analysis, including hashing and probablistic data s
 - Efficient for common queries
 - Less efficient for non-indexed queries
 
-### 2.3 Distribution Strategies
+### C. Distribution Strategies
 - Sharding: Distributes data across servers
 - Replication: Creates data copies across machines
   - Reduces latency
@@ -55,12 +57,12 @@ Explain concepts of big data analysis, including hashing and probablistic data s
   - Risk of inconsistency
 
 ## 3. Big Data Analysis Techniques
-### 3.1 Hash Functions
+### A. Hash Functions
 - Maps data to numbers in known range
 - Example: MD5 (not cryptographically secure)
 - Universal Hashing concepts
 
-### 3.2 Probabilistic Data Structures
+### B. Probabilistic Data Structures
 #### Bloom Filters
 - Approximate set membership
 - Space-efficient
@@ -72,20 +74,20 @@ Explain concepts of big data analysis, including hashing and probablistic data s
 - Stores counts instead of bits
 - Tracks frequency of items
 
-### 3.3 Estimation Techniques
+### C. Estimation Techniques
 - Order statistics for unique items
 - Flajolet-Martin algorithm
 - HyperLogLog for cardinality estimation
 
 ## 4. Parallel Computing
-### 4.1 Fundamentals
+### A. Fundamentals
 - Reasons for parallelization
   - Faster results
   - Larger problem solving
   - Memory distribution
   - Improved responsiveness
 
-### 4.2 Performance Metrics
+### B. Performance Metrics
 #### Amdahl's Law
 - Maximum speedup: 1/(1-p + p/n)
 - p: parallelizable portion
@@ -95,7 +97,7 @@ Explain concepts of big data analysis, including hashing and probablistic data s
 - **Strong Scaling**: Fixed problem size
 - **Weak Scaling**: Fixed work per processor
 
-### 4.3 Python Multiprocessing
+### C. Python Multiprocessing
 #### Basic Concepts
 - Process creation and management
 - Shared memory considerations
@@ -107,7 +109,7 @@ Explain concepts of big data analysis, including hashing and probablistic data s
 - Shared memory: `Value` and `Array`
 - Manager objects for proxy objects
 
-### 4.4 Best Practices
+### D. Best Practices
 - Focus optimization efforts
 - Ensure load balancing
 - Minimize shared state
