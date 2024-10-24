@@ -19,11 +19,6 @@ math: katex
 - Give examples of why health data may need cleaning.
 - Describe strategies for working with missing data, and identify the three main types of missing data.
 
-I'll create a comprehensive but concise note covering the key concepts from the slides about data exploration and cleaning.
-
-
-
-# Data Exploration and Cleaning Notes
 
 ## 1. Data Exploration
 
@@ -65,12 +60,12 @@ I'll create a comprehensive but concise note covering the key concepts from the 
 
 ### Dimensionality Reduction
 1. **Linear Methods**
-   - PCA (Principal Component Analysis)
-   - LDA (Linear Discriminant Analysis)
+   - PCA (Principal Component Analysis): Unsupervised, linear
+   - LDA (Linear Discriminant Analysis): Supervised, linear
 
 2. **Non-linear Methods**
-   - t-SNE
-   - UMAP
+   - t-SNE: Unsupervised, non-linear
+   - UMAP: Unsupervised, non-linear
 
 ## 2. Data Cleaning
 

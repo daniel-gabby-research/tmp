@@ -131,15 +131,27 @@ Types:
 ![Saddle-node](image-8.png)
 - Pitchfork: single fixed point splits into three
   - Supercritical: $$\dot{x} = rx - x^3$$
+    - $r > 0$: one unstable fixed point at $x = 0$, two stable fixed points at $x = \pm \sqrt{r}$
+    - $r < 0$: one stable fixed point at $x = 0$
   - Subcritical: $$\dot{x} = rx + x^3$$
-![Pitchfork](image-7.png)
+    - $r > 0$: one unstable fixed point at $x = 0$
+    - $r < 0$: one stable fixed point at $x = 0$, two unstable fixed points at $x = \pm \sqrt{-r}$
+![Pitchfork Supercritical](image-9.png)
+![Pitchfork Subcritical](image-10.png)
 
 ### C. Chaos
-- Characterized by sensitive dependence on initial conditions
-- Measured by Lyapunov exponent ($\lambda$):
+![Chaos](image-12.png)
+- Definition: sensitive dependence on initial conditions
+- Measured by Lyapunov exponent ($\lambda = \lim_{t \to \infty, \Delta x_0 \to 0} \frac{1}{t} \ln \frac{\Vert \Delta x(X_0, t) \Vert}{\Vert \Delta x_0 \Vert}$):
   - $\lambda < 0$: trajectories converge
   - $\lambda > 0$: chaos (trajectories diverge exponentially)
-  - $$\Delta x(t) ≈ e^{\lambda t}|\Delta x_0|$$
+
+$$\Delta x(t) ≈ e^{\lambda t}|\Delta x_0|$$
+
+### D. Theorems
+![Lorenz Attractor](image-11.png)
+- Poincaré-Bendixson: for continuous, two-dimensional, autonomous systems, every non-empty, bounded subset of the phase plane that does not contain a fixed point is either a periodic orbit or a union of periodic orbits.
+- Bendixson-Dulac: for continuous, two-dimensional, autonomous systems, if the divergence of the vector field is always strictly negative or positive in a region, then the system has no periodic orbits in that region.
 
 ## 4. Applications
 
