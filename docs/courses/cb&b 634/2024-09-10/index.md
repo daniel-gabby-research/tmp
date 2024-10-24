@@ -10,6 +10,15 @@ math: katex
 
 # Data Structures and Algorithms
 
+## 0. Learning Objectives
+- Explain how computer math differs from regular math and why this will affect certain calculations.
+- Compare and contrast common data structures (speed of access, approximate memory usage, etc); recognize and implement them; identify common uses for data structures like trees and stacks.
+- Choose appropriate data representation for answering questions of interest.
+- Explain the relationship between computational complexity and runtime.
+- Compute and numerically estimate computational complexity of an algorithm.
+- Identify factors besides computational complexity that affect the runtime performance of an algorithm.
+- Interpret log-log graphs showing performance.
+
 ## 1. Basic Data Concepts
 
 ### Data Types
@@ -64,7 +73,7 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
    - Variable size based on value
    - Uses IEEE 754 standard
    - Memory usage increases with number size:
-     - For $n \in \mathbb{N}$, if $2^{n-1} \leq x < 2^n$, 
+     - For $n \in \mathbb{N}$, if $2^{30(n-1)} \leq x < 2^{30n}$, 
      then Python will use $24 + 4n$ bytes to store the integer.
 
    Example calculation:

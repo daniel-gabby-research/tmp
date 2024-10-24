@@ -10,6 +10,11 @@ math: katex
 
 # Iterative Algorithms
 
+## 0. Learning Objectives
+- Apply the gradient descent algorithm to estimate minima/maxima.
+- Apply Newton's method to estimate zeros.
+- Explain k-means clustering.
+
 ## 1. Definitions
 An **iterative algorithm**:
 - Starts with an initial guess

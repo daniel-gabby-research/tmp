@@ -9,6 +9,13 @@ math: katex
 ---
 
 # Standards in Healthcare and Computing
+
+## 0. Learning Objectives
+- Explain why we need data standards.
+- Identify examples of hierarchical data formats and relate them to common data structures.
+- Discuss which data standards are most appropriate for which data.
+Give examples of informatics-specific data standards and state their domains.
+
 ## 1. Definition of Standards
 
 - **Government Context**: Requirements, compliance measures, or minimum qualification criteria

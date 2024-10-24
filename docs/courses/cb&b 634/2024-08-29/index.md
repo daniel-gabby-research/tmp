@@ -10,6 +10,11 @@ math: katex
 
 # Introduction to Informatics
 
+## 0. Learning Objectives
+- Distinguish informatics from related disciplines.
+- Explain the relationship between data, information, knowledge, and models.
+- Describe ontologies as a concept and their role. List health-relevant ontologies.
+
 ## 1. What is informatics?
 
 *Informatics* is:
