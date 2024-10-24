@@ -57,6 +57,7 @@ typedef struct _object {
 
 #### `sys.getsizeof()`
 We can use `sys.getsizeof()` to get the size of an object in bytes.
+
 ```python
 >>> import sys
 >>> sys.getsizeof(None)
@@ -76,23 +77,24 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
      - For $n \in \mathbb{N}$, if $2^{30(n-1)} \leq x < 2^{30n}$, 
      then Python will use $24 + 4n$ bytes to store the integer.
 
-   Example calculation:
-   ```python
-   import sys
+*Example calculation*:
 
-   def calculate_int_size(x):
-       n = x.bit_length()
-       return 24 + 4 * ((n - 1) // 30 + 1)
+```python
+import sys
 
-   # Example usage
-   x = 1073741824  # 2^30
-   calculated_size = calculate_int_size(x)
-   actual_size = sys.getsizeof(x)
+def calculate_int_size(x):
+    n = x.bit_length()
+    return 24 + 4 * ((n - 1) // 30 + 1)
 
-   print(f"For integer {x}:")
-   print(f"Calculated size: {calculated_size} bytes")
-   print(f"Actual size: {actual_size} bytes")
-   ```
+# Example usage
+x = 1073741824  # 2^30
+calculated_size = calculate_int_size(x)
+actual_size = sys.getsizeof(x)
+
+print(f"For integer {x}:")
+print(f"Calculated size: {calculated_size} bytes")
+print(f"Actual size: {actual_size} bytes")
+```
 
 2. **Float**
 ![alt text](image-1.png)
@@ -159,6 +161,7 @@ We can use `sys.getsizeof()` to get the size of an object in bytes.
    - User-defined types
    - Custom methods
    - Attributes
+
 ```python
 class Patient:
     def __init__(self, name, age):
