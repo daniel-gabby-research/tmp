@@ -43,11 +43,13 @@ math: katex
 | $\mathbf{b}_i = (h_i, c_i)$ | Biochemical features (hydrophobicity, charge) of point i | Would it be better to use $\mathbf{b}_i = b(\mathbf{x}_i) \in \mathbb{R}^2$? |
 | $P^G$ | Global biochemical aggregator point | Same problem as $v^G$. |
 | $P_i^L$ | Local biochemical aggregator point | Same problem as $v_i^L$. |
+| $N_L$ | The number of local biochemical aggregator points | I feel it is not a good idea to introduce another notation $N_L$ for the number of local points. Why don't we use $\vert V_L \vert$? |
 
 - Comment:
   - What is $\mathbf{b}$? Is it a constant? If not, why we use $b(x, y, z) = \mathbf{b}$ as an implicit definition?
   - Would it be better to use $\mathbf{b}_i = b(\mathbf{x}_i) \in \mathbb{R}^2$?
   - The definition of $P^G$ and $P_i^L$ should be clear. Same as $v^G$ and $v_i^L$.
+  - I feel it is not a good idea to introduce another notation $N_L$ for the number of local points. Why don't we use $\vert V_L \vert$?
 
 ### Neural Network Components
 | Symbol | Description | Comment |
