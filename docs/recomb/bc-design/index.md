@@ -40,7 +40,7 @@ math: katex
 | $\mathcal{P}_S$ | Surface point cloud | Clear |
 | $\mathcal{P}_I$ | Internal point cloud | Clear |
 | $\mathcal{P}$ | Combined point cloud | Clear |
-| $P_i$ | Point in the point cloud with coordinates and features |
+| $P_i$ | Point in the point cloud with coordinates and features | Should be $P_i \in \mathcal{P}$ |
 | $\mathbf{x}_i$ | Spatial coordinates of point i | Should use $\mathbf{x}_i \in \mathbb{R}^3$ for coordinates. |
 | $\mathbf{b}_i = (h_i, c_i)$ | Biochemical features (hydrophobicity, charge) of point i | Would it be better to use $\mathbf{b}_i = b(\mathbf{x}_i) \in \mathbb{R}^2$? |
 | $P^G$ | Global biochemical aggregator point | Same problem as $v^G$. |
@@ -82,6 +82,7 @@ $$
   - Should be $\text{GPE} \in \mathbb{R}^{\vert V \vert \times d}$.
 
 ### Loss Functions
+
 | Symbol | Description | Comment |
 |--------|------------|-------------|
 | $\mathcal{L}_{\text{CE}}$ | Cross-entropy loss | Clear |
@@ -96,8 +97,8 @@ $$
 |----------|-------------|-------------|
 | $S' = S \odot W_E + GPE$ | Attention score modification | Clear |
 | $\mathcal{L} = \mathcal{L}_{\text{CE}} + \lambda_1\mathcal{L}_{\text{GCL}} + \lambda_2\mathcal{L}_{\text{LCL}}$ | Combined loss function | Clear |
-| $\mathcal{N}_r(P'_i) = \{P'_j \mid \|P'_i - P'_j\| \leq r\}$ | Multi-scale neighborhood definition | Clear |
-| $K_{BC} = \max(1, \lfloor 1400/\|V\| \rfloor)$ | Dynamic connection parameter for BC-Graph | Clear |
+| $\mathcal{N}_r(P'_i) = \{P'_j \mid \Vert P'_i - P'_j \Vert \leq r\}$ | Multi-scale neighborhood definition | Clear |
+| $K_{BC} = \max(1, \lfloor 1400/\vert V \vert \rfloor)$ | Dynamic connection parameter for BC-Graph | Clear |
 
 ### Other Mathematical Notation
 
