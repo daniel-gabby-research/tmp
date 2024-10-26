@@ -15,25 +15,29 @@ math: katex
 
 | Symbol | Description | Comment |
 |--------|------------|-------------|
-| $G(V, E, F_V, F_E)$ | Structure graph with nodes $V$, edges $E$, node features $F_V$, edge features $F_E$ | Clear |
-| $V$ | Set of nodes (residues) in the structure graph | Clear |
-| $E$ | Set of edges in the structure graph | Clear |
-| $V'$ | Augmented node set including aggregator nodes | Clear |
-| $E'$ | Augmented edge set including aggregator edges | Clear |
-| $V_c$ | Set of structure aggregator nodes | Clear |
+| $G(V, E, F_V, F_E)$ | Structure graph with nodes $V$, edges $E$, node features $F_V$, edge features $F_E$ | Should be $\mathcal{G}(\mathcal{V}, \mathcal{E}, \mathcal{F}_\mathcal{V}, \mathcal{F}_\mathcal{E})$. |
+| $V$ | Set of nodes (residues) in the structure graph | Should be $\mathcal{V}$. |
+| $E$ | Set of edges in the structure graph | Should be $\mathcal{E}$. |
+| $V'$ | Augmented node set including aggregator nodes | Should be $\mathcal{V}'$. |
+| $E'$ | Augmented edge set including aggregator edges | Should be $\mathcal{E}'$. |
+| $V_c$ | Set of structure aggregator nodes | Should be $\mathcal{V}_c$. |
 | `k` | Number of nearest neighbors in k-NN graph (k=30) | Good |
 | $v_i^L$ | Local structure aggregator node | Should not have both superscript and subscript |
 | $v^G$ | Global structure aggregator node | Should not have superscript |
-| $Q$ | Local coordinate system for residues | Should be $\mathbf{Q} \in \mathbb{R}^{3 \times 3}$ |
+| $Q$ | Local coordinate system for residues | Should be $\mathcal{Q}$ |
 
 - Comment:
   - The annotation of additional nodes and edges should be clear. Otherwise, it will be hard to read.
     - Should not have both superscript and subscript: $v_i^L$
     - Should not have superscript: $v^G$
+    - $G$ is a global node and also a notation of graph $G$?
   - Should be $\mathbf{Q} \in \mathbb{R}^{3 \times 3}$.
     - Quaternion system is $\mathbf{q} \in \mathbb{H}$. Need to clarify.
     - $\mathbf{Q}$ is a rotation matrix.
     - Coordinate system $\mathcal{Q}$ should not be the same as query matrix $Q$ in attention.
+  - For the aggregator nodes, should we use $\mathcal{V}_c$ and $\mathcal{E}_c$? What exactly is the $c$?
+    - $c$ is for "context" or "center"?
+    - We can actually have $\mathcal{V}_g$ for global aggregator nodes, and $\mathcal{V}_l$ for local aggregator nodes.
 
 
 ### Point Cloud and Biochemical Features
@@ -102,7 +106,7 @@ $$
 | $S' = S \odot W_E + GPE$ | Attention score modification | Clear |
 | $\mathcal{L} = \mathcal{L}_{\text{CE}} + \lambda_1\mathcal{L}_{\text{GCL}} + \lambda_2\mathcal{L}_{\text{LCL}}$ | Combined loss function | Clear |
 | $\mathcal{N}_r(P'_i) = $ {$P'_j \mid \Vert \mathbf{x}'_i - \mathbf{x}'_j \Vert \leq r$} | Multi-scale neighborhood definition | Clear |
-| $K_{BC} = \max(1, \lfloor 1400/\vert V \vert \rfloor)$ | Dynamic connection parameter for BC-Graph | Clear |
+| $K_{BC} = \max(1, \lfloor 1400/\vert V \vert \rfloor)$ | Dynamic connection parameter for BC-Graph | What is $K_{BC}$? Isn't it $K_{\mathcal{B}}$? |
 
 ### Other Mathematical Notation
 
