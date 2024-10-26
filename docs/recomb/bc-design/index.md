@@ -12,6 +12,7 @@ math: katex
 ## Mathematical Notation Details
 
 ### Graph and Set Notation
+
 | Symbol | Description | Comment |
 |--------|------------|-------------|
 | $G(V, E, F_V, F_E)$ | Structure graph with nodes $V$, edges $E$, node features $F_V$, edge features $F_E$ | Clear |
@@ -32,6 +33,7 @@ math: katex
   - Should be $\mathbf{Q} \in \mathbb{R}^{3 \times 3}$: $Q$. Quaternion system is $\mathbf{q} \in \mathbb{H}$. Need to clarify.
 
 ### Point Cloud and Biochemical Features
+
 | Symbol | Description | Comment |
 |--------|------------|-------------|
 | $b(x, y, z) = \mathbf{b}$ | Continuous mapping of biochemical properties in 3D space | We have $x, y, z$ and $\mathbf{x}$ for coordinates at the same time. |
@@ -52,6 +54,7 @@ math: katex
   - I feel it is not a good idea to introduce another notation $N_L$ for the number of local points. Why don't we use $\vert V_L \vert$?
 
 ### Neural Network Components
+
 | Symbol | Description | Comment |
 |--------|------------|-------------|
 | $H_V$ | Node embeddings | Clear |
@@ -88,6 +91,7 @@ $$
 | $\lambda_1, \lambda_2$ | Loss weights (both set to 1) | Clear |
 
 ### Key Equations
+
 | Equation | Description | Comment |
 |----------|-------------|-------------|
 | $S' = S \odot W_E + GPE$ | Attention score modification | Clear |
@@ -96,6 +100,7 @@ $$
 | $K_{BC} = \max(1, \lfloor 1400/\|V\| \rfloor)$ | Dynamic connection parameter for BC-Graph | Clear |
 
 ### Other Mathematical Notation
+
 | Symbol | LaTeX Code | Description |
 |--------|------------|-------------|
 | $\odot$ | Hadamard (element-wise) product | Clear |
