@@ -97,7 +97,7 @@ $$
 |----------|-------------|-------------|
 | $S' = S \odot W_E + GPE$ | Attention score modification | Clear |
 | $\mathcal{L} = \mathcal{L}_{\text{CE}} + \lambda_1\mathcal{L}_{\text{GCL}} + \lambda_2\mathcal{L}_{\text{LCL}}$ | Combined loss function | Clear |
-| $\mathcal{N}_r(P'_i) = \{P'_j \mid \Vert P'_i - P'_j \Vert \leq r\}$ | Multi-scale neighborhood definition | Clear |
+| $\mathcal{N}_r(P'_i) = $ {$P'_j \mid \Vert \mathbf{x}'_i - \mathbf{x}'_j \Vert \leq r$} | Multi-scale neighborhood definition | Clear |
 | $K_{BC} = \max(1, \lfloor 1400/\vert V \vert \rfloor)$ | Dynamic connection parameter for BC-Graph | Clear |
 
 ### Other Mathematical Notation
