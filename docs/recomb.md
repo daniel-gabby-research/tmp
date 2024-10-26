@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Courses at Yale
-nav_order: 7
+title: RECOMB
+nav_order: 6
 has_children: true
 ---
