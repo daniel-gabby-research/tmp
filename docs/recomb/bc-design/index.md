@@ -30,7 +30,11 @@ math: katex
   - The annotation of additional nodes and edges should be clear. Otherwise, it will be hard to read.
     - Should not have both superscript and subscript: $v_i^L$
     - Should not have superscript: $v^G$
-  - Should be $\mathbf{Q} \in \mathbb{R}^{3 \times 3}$: $Q$. Quaternion system is $\mathbf{q} \in \mathbb{H}$. Need to clarify.
+  - Should be $\mathbf{Q} \in \mathbb{R}^{3 \times 3}$.
+    - Quaternion system is $\mathbf{q} \in \mathbb{H}$. Need to clarify.
+    - $\mathbf{Q}$ is a rotation matrix.
+    - Coordinate system $\mathcal{Q}$ should not be the same as query matrix $Q$ in attention.
+
 
 ### Point Cloud and Biochemical Features
 
