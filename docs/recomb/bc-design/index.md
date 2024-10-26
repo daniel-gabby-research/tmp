@@ -58,11 +58,11 @@ math: katex
 | Symbol | Description | Comment |
 |--------|------------|-------------|
 | $H_V$ | Node embeddings | Clear |
-| $w_E$ | Edge weights | Why $w_E \in \mathbb{R}^{|E| \times d}$ while we can have $w_E[i,j] \in \mathbb{R}$? |
+| $w_E$ | Edge weights | Why $w_E \in \mathbb{R}^{\vert E \vert \times d}$ while we can have $w_E[i,j] \in \mathbb{R}$? |
 | $H_{V_c}$ | Structure aggregator node embeddings | Clear |
 | $H_{V'}$ | Concatenated node embeddings | Clear |
 | $W_E$ | Weight matrix for edges | What is the difference between $w_E$ and $W_E$? |
-| $GPE$ | Graph Positional Encodings | Should be $\text{GPE} \in \mathbb{R}^{|V| \times d}$ |
+| $GPE$ | Graph Positional Encodings | Should be $\text{GPE} \in \mathbb{R}^{\vert V \vert \times d}$ |
 | $Q, K, V$ | Query, Key, Value matrices in attention | Clear |
 | $S$ | Attention score matrix | Clear |
 | $S'$ | Modified attention score matrix | Clear |
@@ -79,7 +79,7 @@ w_E[i,j] & \text{if } e_{ij} \in E \\
 0 & \text{otherwise},
 \end{cases}
 $$
-  - Should be $\text{GPE} \in \mathbb{R}^{|V| \times d}$.
+  - Should be $\text{GPE} \in \mathbb{R}^{\vert V \vert \times d}$.
 
 ### Loss Functions
 | Symbol | Description | Comment |
