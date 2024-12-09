@@ -3,7 +3,7 @@ layout: default
 parent: S&DS 665 Intermediate Machine Learning
 grand_parent: Courses at Yale
 title: "Discrete Data Graphs and Graph Neural Networks"
-nav_order: 2
+nav_order: 6
 discuss: true
 math: katex
 ---
@@ -61,7 +61,7 @@ where $\mathcal{C}$ is the set of cliques in the graph $G$.
 Let $\Omega = \Sigma^{-1}$ be the precision matrix. A zero in $\Omega$ indicates a lack of the corresponding edge in the graph So, the adjacency matrix of the graph is
 
 $$
-A = (1(\Omega_{ij} \neq 0))
+A = (\mathbb{1}(\Omega_{ij} \neq 0))
 $$
 
 That is,
@@ -69,7 +69,7 @@ That is,
 $$
 A_{ij} =
 \begin{cases}
-1 & \text{if } |\Omega_{ij}| > 0 \\
+1 & \text{if } \vert \Omega_{ij} \vert > 0 \\
 0 & \text{otherwise}
 \end{cases}
 $$
@@ -122,15 +122,15 @@ $$
 In the following, we will simply assume that the mean $\mu$ is known. For $d < n$, the maximum likelihood estimate is easily obtained by noting that the log-likelihood of the data is
 
 $$
-\ell(\Omega) = \frac{n}{2} \log |\Omega| - \frac{n}{2} \text{tr}(\Omega S_n) - \frac{nd}{2} \log(2\pi)
+\ell(\Omega) = \frac{n}{2} \log \vert \Omega \vert - \frac{n}{2} \text{tr}(\Omega S_n) - \frac{nd}{2} \log(2\pi)
 $$
 
-and the gradient of $\log |\chi|$ as a function of $\chi \in S_{++}^d$ is $\nabla \log |\chi| = \chi^{-1}$.
+and the gradient of $\log \vert \chi \vert$ as a function of $\chi \in S_{++}^d$ is $\nabla \log \vert \chi \vert = \chi^{-1}$.
 
 The glasso optimizes the parameters of $\Omega = \Sigma^{-1}$ by minimizing:
 
 $$
-\text{trace}(\Omega S_n) - \log |\Omega| + \lambda \sum_{j \neq k} |\Omega_{jk}|
+\text{trace}(\Omega S_n) - \log \vert \Omega \vert + \lambda \sum_{j \neq k} \vert \Omega_{jk} \vert
 $$
 
 ### 3.2 Parallel Lasso
@@ -139,7 +139,7 @@ $$
 > Conditioned on $(x_2, \ldots, x_p)$, variable $X_1 \in \{0, 1\}$ has probability mass function given by a logistic function,
 >
 > $$
-> p(X_1 = 1 | x_2, \ldots, x_p) = \text{sigmoid}
+> p(X_1 = 1 \mid x_2, \ldots, x_p) = \text{sigmoid}
 > \left(
 > \beta_1 + \sum_{j \in N(1)} \beta_{1j} x_j
 > \right)
