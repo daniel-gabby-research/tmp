@@ -1,12 +1,15 @@
-title: Daniel's Notebook
+title: Daniel & Gabby's Notebook
 description: A starter template for a Jeykll site using the Just the Docs theme!
 theme: just-the-docs
 
-url: https://open-genome.github.io
+url: https://daniel-gabby-research.github.io
 
 aux_links:
-  Github: https://github.com/open-genome/open-genome.github.io
+  Github: https://github.com/daniel-gabby-research/daniel-gabby-research.github.io
+  Twitter: https://x.com/danielgabby
+  LinkedIn: https://www.linkedin.com/in/daniel-gabby-research/
 
 compress_html:
   blanklines: false
+
 
