@@ -221,7 +221,7 @@ $$
 \begin{align*}
 x &\to Px \\
 L &\to PLP^T \\
-L_i &\to PL_iP^T
+L^i &\to PL^iP^T
 \end{align*}
 $$
 
@@ -229,9 +229,9 @@ The transformed polynomial kernels are
 
 $$
 \begin{align*}
-f(Px) &= \sum_{i=0}^d w_i (PL_iP^T)Px \\
-&= \sum_{i=0}^d w_iPL_iPx \\
-&= P\sum_{i=0}^d w_iL_iPx \\
+f(Px) &= \sum_{i=0}^d w_i (PL^iP^T)Px \\
+&= \sum_{i=0}^d w_iPL^iPx \\
+&= P\sum_{i=0}^d w_iL^iPx \\
 &= Pf(x)
 \end{align*}
 $$
