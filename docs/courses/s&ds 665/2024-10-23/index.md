@@ -153,6 +153,8 @@ $$
 
 ## 4. Graph Neural Networks
 
+![alt text](image-6.png)
+
 ### 4.1 Graph Laplacian
 
 ![alt text](image-5.png)
@@ -230,8 +232,8 @@ The transformed polynomial kernels are
 $$
 \begin{align*}
 f(Px) &= \sum_{i=0}^d w_i (PL^iP^T)Px \\
-&= \sum_{i=0}^d w_iPL^iPx \\
-&= P\sum_{i=0}^d w_iL^iPx \\
+&= \sum_{i=0}^d w_iPL^ix \\
+&= P\sum_{i=0}^d w_iL^ix \\
 &= Pf(x)
 \end{align*}
 $$
