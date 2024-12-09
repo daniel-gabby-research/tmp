@@ -24,7 +24,7 @@ $$
 \min_{\beta} \sum_{i=1}^n (Y_i - \beta^T X_i)^2 + \lambda \sum_{j=1}^p |\beta_j|
 $$
 
-- **L1 Regularization:** The $$ \sum_{j=1}^p |\beta_j| $$ term imposes sparsity by shrinking some coefficients exactly to zero.
+- **L1 Regularization:** The $$ \sum_{j=1}^p \vert \beta_j \vert $$ term imposes sparsity by shrinking some coefficients exactly to zero.
 - **Bias-Variance Tradeoff:** As $$ \lambda $$ increases, bias increases but variance decreases.
 
 ![alt text](image-1.png)
