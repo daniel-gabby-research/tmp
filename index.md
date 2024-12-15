@@ -1,4 +1,3 @@
- // Start of Selection
 ---
 title: Home
 layout: home
