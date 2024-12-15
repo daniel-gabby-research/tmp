@@ -151,6 +151,19 @@ $$
     - Create an edge $(i,j)$ if $j \in N(i)$ and $i \in N(j)$
     - Create an edge $(i,j)$ if $j \in N(i)$ or $i \in N(j)$
 
+### 3.3 Comparison
+
+The following table summarizes the key features of the two methods:
+
+| Feature | Graphical Lasso | Parallel Lasso |
+|---------|----------------|----------------|
+| Problem Type | Sparse precision matrix estimation | Sparse linear regression for multiple tasks |
+| Target | Conditional independence structure | Sparse regression coefficients |
+| Regularization | $\ell_1$-penalized precision matrix | $\ell_1$-penalized regression coefficients |
+| Applications | Gaussian graphical models, network inference | Multitask learning, parallel regressions |
+| Key Algorithm | ADMM, coordinate descent | Coordinate descent, gradient methods |
+
+
 ## 4. Graph Neural Networks
 
 ![alt text](image-6.png)
